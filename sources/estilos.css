@@ -1,16 +1,19 @@
 .icono-accion {
     font-size: 1.5rem;
-    color: red;
+    color: white;
     cursor: pointer;
 }
 
 .icono-accion:hover {
-  color: #0a3d7a;
+  color: red;
 }
 
-.thead-azul th {
-  background-color: rgb(24, 82, 157);
+.thead-verde th {
+  position: sticky;
+  top: 55px;
+  background-color: rgb(40, 173, 86);
   color: #fff;
+  border-color: rgb(40, 173, 86);
 }
 
 .fecha-card {
@@ -21,4 +24,20 @@
   background-color: #f1f1f1;
   color: #6c757d;
   border-left-color: red;
+}
+
+.sticky-header {
+  background-color: rgb(24, 82, 157) ;
+  color: white;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.contenido-tabla {
+    padding-top: 30px;
+}
+
+.contenido-cards {
+    padding-top: 60px;
 }

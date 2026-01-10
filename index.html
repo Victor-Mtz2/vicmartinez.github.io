@@ -13,26 +13,36 @@
 	<body>
 		<div class="container my-4">
 
-			<!-- TÍTULO -->
-			<div class="row align-items-center mb-3">
-				<div class="col">
-					<h5 class="fw-semibold text-primary mb-0">
+			<!-- HEADER FIJO -->
+			<header class="fixed-top">
+				<div class="container sticky-header">
+
+				
+				<div class="row align-items-center">
+					<div class="col">
+					<h5 class="fw-semibold">
 						Calendario de recepción de documentos para trámite de pago y fechas de pago 2026
 					</h5>
-				</div>
+					</div>
 
-				<div class="col-auto text-end">
-					<a data-bs-placement="left" title="Versión para imprimir"
-					onclick="abrirPdf()" class="icono-accion">
+					<div class="col-auto text-end">
+					<a
+						data-bs-placement="left"
+						title="Versión para imprimir"
+						onclick="abrirPdf()"
+						class="icono-accion"
+					>
 						<i class="bi bi-file-earmark-pdf"></i>
 					</a>
+					</div>
 				</div>
-			</div>
+				</div>
+			</header>
 
 			<!-- TABLA (tablet + escritorio) -->
-			<div class="d-none d-md-block">
+			<div class="d-none d-md-block contenido-tabla">
 				<table class="table table-bordered table-hover" id="tablaFechas">
-					<thead class="thead-azul">
+					<thead class="thead-verde">
 						<tr>
 							<th>Quincena</th>
 							<th>Fecha límite de recepción</th>
@@ -44,7 +54,7 @@
 			</div>
 
 			<!-- TARJETAS (móvil) -->
-			<div class="d-block d-md-none" id="cardsFechas">
+			<div class="d-block d-md-none contenido-cards" id="cardsFechas">
 				<!-- JS insertará cards -->
 			</div>
 
