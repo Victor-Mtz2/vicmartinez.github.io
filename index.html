@@ -11,36 +11,45 @@
 	</head>
 	
 	<body>
-		<a data-toggle="tooltip" title="Versión para imprimir" onclick="abrirPdf()"><i class="bi bi-file-earmark-pdf icono"></i></a>
+		<div class="container my-4">
 
-        <table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th scope="col">Quincena</th>
-					<th scope="col">Fecha límite para el trámite de pago ante la Dirección de Personal</th>
-					<th scope="col">Fecha de pago de la nómina</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr title="1 al 15 de enero">
-					<td>1a. enero</td>
-					<td>07 de enero</td>
-					<td>14</td>
-				</tr>
+			<!-- TÍTULO -->
+			<div class="row align-items-center mb-3">
+				<div class="col">
+					<h5 class="fw-semibold text-primary mb-0">
+						Calendario de recepción de documentos para trámite de pago y fechas de pago 2026
+					</h5>
+				</div>
 
-				<tr title="16 al 31 de enero">
-					<td>2a. enero</td>
-					<td>16 de enero</td>
-					<td>30</td>
-				</tr>
-				
-				<tr title="1 al 15 de febrero">
-					<td>1a. febrero</td>
-					<td>30 de enero</td>
-					<td>13</td>
-				</tr>
-			</tbody>
-			</table>
+				<div class="col-auto text-end">
+					<a data-bs-placement="left" title="Versión para imprimir"
+					onclick="abrirPdf()" class="icono-accion">
+						<i class="bi bi-file-earmark-pdf"></i>
+					</a>
+				</div>
+			</div>
+
+			<!-- TABLA (tablet + escritorio) -->
+			<div class="d-none d-md-block">
+				<table class="table table-bordered table-hover" id="tablaFechas">
+					<thead class="thead-azul">
+						<tr>
+							<th>Quincena</th>
+							<th>Fecha límite de recepción</th>
+							<th>Fecha de pago de la nómina</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<!-- TARJETAS (móvil) -->
+			<div class="d-block d-md-none" id="cardsFechas">
+				<!-- JS insertará cards -->
+			</div>
+
+		</div>
+
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 		<script src="./sources/acciones.js"></script>
     </body>

@@ -1,5 +1,24 @@
-.icono {
+.icono-accion {
     font-size: 1.5rem;
     color: red;
     cursor: pointer;
+}
+
+.icono-accion:hover {
+  color: #0a3d7a;
+}
+
+.thead-azul th {
+  background-color: rgb(24, 82, 157);
+  color: #fff;
+}
+
+.fecha-card {
+  border-left: 5px solid rgb(24, 82, 157);
+}
+
+.fecha-vencida {
+  background-color: #f1f1f1;
+  color: #6c757d;
+  border-left-color: red;
 }
