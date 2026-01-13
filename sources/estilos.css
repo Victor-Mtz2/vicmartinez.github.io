@@ -34,7 +34,7 @@
 }
 
 .tab-scroll {
-  max-height: 400px;   
+  max-height: 250px;   
   overflow-y: auto;
   padding-left: 1rem;
   padding-right: 1rem;
