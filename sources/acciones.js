@@ -37,7 +37,7 @@ datos.forEach(item => {
 
   /* -------- TABLA -------- */
   const tr = document.createElement('tr');
-  if (vencida) tr.classList.add('table-danger', 'text-muted');
+  if (vencida) tr.classList.add('table-secondary', 'text-muted');
 
   tr.innerHTML = `
     <td>${item.titulo}</td>
@@ -62,5 +62,5 @@ datos.forEach(item => {
 
 
 function abrirPdf(){
-    window.open("pdfs/Calendario.pdf")
+    window.open("../pdfs/Calendario.pdf")
 }

@@ -10,20 +10,19 @@
 
 .thead-verde th {
   position: sticky;
-  top: 55px;
+  top: .4px;
   background-color: rgb(40, 173, 86);
   color: #fff;
-  border-color: rgb(40, 173, 86);
 }
 
 .fecha-card {
-  border-left: 5px solid rgb(24, 82, 157);
+  border-left: 5px solid rgb(40, 173, 86);
 }
 
 .fecha-vencida {
   background-color: #f1f1f1;
   color: #6c757d;
-  border-left-color: red;
+  border-left-color: gray;
 }
 
 .sticky-header {
@@ -34,10 +33,18 @@
   padding-bottom: 10px;
 }
 
-.contenido-tabla {
-    padding-top: 30px;
+.tab-scroll {
+  max-height: 600px;   
+  overflow-y: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.contenido-cards {
-    padding-top: 60px;
+.division {
+  background-color: #fff;
+  color: #fff;
+}
+
+.lista-negrita li::marker {
+  font-weight: bold;
 }
