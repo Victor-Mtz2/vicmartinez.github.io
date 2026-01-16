@@ -4,96 +4,134 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Calendarios</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-		<!-- estilos propios -->
+		<!-- estilos Bulma -->
+		<link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+        <!-- estilos propios -->
 		<link rel="stylesheet" type="text/css" href="../sources/estilos.css">
+		<!-- iconos -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Alpine.js -->
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 	</head>
+	
+	<body>
+		<div class="container bg-azul pl-3">
+			<div class="columns is-vcentered pt-3 pl-3">
+  				<div class="column is-1">
+					<figure class="image is-64x64">
+						<img src="../Public/Logosimbolo_mini_fo.png"/>
+					</figure>
+				</div>
+  				<div class="column">
+					<p class="has-text-white has-text-weight-medium is-size-5-tablet">Calendario de captura de justificantes en SsRH y de entrega de tarjetas de asistencia a la Dirección de Personal</p>
+				</div>
+				<div class="column is-1">
+					<a title="Versión para imprimir" onclick="abrirPdf()" class="icono-accion">
+                        <i class="fa-regular fa-file-pdf"></i>
+                    </a>
+				</div>
+				
+			</div>
+		</div>
 
-    <body class="p-4">
+		<section class="section" x-data="{ tab: 'calendario' }">
+			<div class="container">
 
-        <!-- HEADER FIJO -->
-        <header class="fixed-top px-4">
-            <div class="sticky-header px-3 mb-5">
-                <div class="row align-items-center">
-                    <div class="col">
-                    <h5 class="fw-semibold">
-                        Calendario de recepción de documentos para trámite de pago y fechas de pago 2026
-                    </h5>
-                    </div>
+				<!-- TABS -->
+				<div class="tabs is-centered">
+					<ul>
+						<li :class="{ 'is-active': tab === 'calendario' }">
+							<a @click="tab = 'calendario'">
+								<span class="icon is-small">
+									<i class="fa-regular fa-calendar-days"></i>
+								</span>
+								<span>Calendario</span>
+							</a>
+						</li>
 
-                    <div class="col-auto text-end">
-                        <a data-bs-placement="left" title="Versión para imprimir" onclick="abrirPdf()" class="icono-accion">
-                            <i class="bi bi-file-earmark-pdf"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </header>
+						<li :class="{ 'is-active': tab === 'consideraciones' }">
+							<a @click="tab = 'consideraciones'">
+								<span class="icon is-small">
+									<i class="fa-regular fa-note-sticky"></i>
+								</span>
+								<span>Consideraciones</span>
+							</a>
+						</li>
 
-        <div class="mt-5">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="calendario-tab" data-bs-toggle="tab" data-bs-target="#calendario" type="button" role="tab" aria-controls="calendario" aria-selected="true">Calendario</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="consideraciones-tab" data-bs-toggle="tab" data-bs-target="#consideraciones" type="button" role="tab" aria-controls="consideraciones" aria-selected="false">Consideraciones</button>
-                </li>
-            </ul>
-            <!-- Tabs 
-            <ul class="nav nav-tabs" id="miTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="tab-calendario" data-bs-toggle="tab" data-bs-target="#calendario" type="button"
-                            role="tab" aria-controls="calendario" aria-selected="true">Calendario</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="tab-consideraciones" data-bs-toggle="tab" data-bs-target="#consideraciones" type="button" 
-                            role="tab" aria-controls="consideraciones" aria-selected="false">Consideraciones</button>
-                </li>
-            </ul>-->
-        </div>
-        
+						<li :class="{ 'is-active': tab === 'tabla' }">
+							<a @click="tab = 'tabla'">
+								<span class="icon is-small">
+									<i class="fa-solid fa-table-list"></i>
+								</span>
+								<span>Tabla</span>
+							</a>
+						</li>
+					</ul>
+				</div>
 
-        <!-- Contenido -->
-        <div class="tab-content border border-top-0 px-4" id="miTabContent">
-            <div class="flex division">_</div>
-            <div class="tab-pane fade show active tab-scroll" id="calendario" role="tabpanel" aria-labelledby="calendario">
-                <!-- TABLA (tablet y escritorio) --> 
-                    <div class="d-none d-md-block">
-                    <table class="table table-bordered border-success table-hover"  id="tablaFechas">
-                        <thead class="thead-verde">
-                            <tr>
-                                <th>Quincena a justificar</th>
-                                <th>Fecha máxima de captura en el SsRH y recepción de documentos</th>
-                                <th>Quincena en la que se aplica el descuento</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                    </div>
+				<!-- CONTENIDO -->
+				<div class="box" x-data="fechasApp()">
 
-                    <!-- TARJETAS (móvil) -->
-                    <div class="d-block d-md-none" id="cardsFechas">
-                        <!-- JS insertará cards -->
-                    </div>
-            </div>
+					<div x-show="tab === 'calendario'">
+						<div class="is-hidden-mobile">
+							<table class="table is-fullwidth" id="tablaFechas">
+								<thead>
+									<tr>
+									<th>Periodo</th>
+									<th>Recepción</th>
+									<th>Pago</th>
+									</tr>
+								</thead>
+								<tbody>
+									<template x-for="item in datos" :key="item.titulo">
+									<tr :class="{ 'has-background-grey-lighter has-text-grey': esVencida(item.fecha) }">
+										<td x-text="item.titulo"></td>
+										<td x-text="item.fechaTexto"></td>
+										<td x-text="item.fechaNomina"></td>
+									</tr>
+									</template>
+								</tbody>
+							</table>
+						</div>
+						
 
-            <div class="tab-pane fade tab-scroll p-4" id="consideraciones" role="tabpanel" aria-labelledby="tab-consideraciones">
-                <ol class="lista-negrita" type="A">
-                    <li>Todas las solicitudes de permisos que justifiquen la ausencia de los trabajadores, de acuerdo al modelo de administración (tipo de personal), deberán contar con el visto bueno del Director, Secretario, Administradores o Jefe inmediato de las entidades académicas y dependencias.</li>
-                    <li>Las justificaciones del personal deberán registrarse en el módulo de registro y control de asistencia del Subsistema de Recursos Humanos (SsRH), indistintamente del medio a través del cual registren su asistencia (huella digital, tarjeta o lista de asistencia). Las justificaciones capturadas en el sistema no deberán enviarse a través del Sistema de Correspondencia Hermes.</li>
-                    <li>Las incapacidades médicas deberán contener el sello de recibido de la entidad académica o dependencia en el reverso del documento. Éstas deberán capturarse en el SsRH y enviarse en original a través de la ventanilla única de oficialía de partes de la DGRH.</li>
-                    <li>La documentación original que respalde las justificaciones capturadas en el SsRH deberá conservarse por lo menos 10 años para efectos de verificación por parte de los organismos fiscalizadores.</li>
-                    <li>En caso de contar con personal eventual que registre asistencia a través de tarjeta o lista, únicamente se deberán reportas las incidencias a través del formato "Reporte Quincenal de Incidencias de Personal Eventual".</li>
-                    <li>Con base en el Reglamento de Responsabilidades Administrativas solicitamos observar puntualmente las fechas establecidas en el presente calendario.</li>
-                    <li>Los justificantes que deben de capturarse en el SsRH se especifican en la Matriz de justificaciones.</li>
-                </ol>                
-            </div>
-        </div>
+						<div id="cardsFechas" class="is-hidden-tablet">
+							<template x-for="item in datos" :key="item.titulo">
+								<div class="card mb-2"
+									:class="{ 'has-background-grey-lighter has-text-grey': esVencida(item.fecha) }">
+									<div class="card-content py-2">
+										<p class="has-text-weight-semibold" x-text="item.titulo"></p>
+										<p class="is-size-7" x-text="item.fechaTexto"></p>
+										<p class="is-size-7 has-text-grey" x-text="item.fechaNomina"></p>
+									</div>
+								</div>
+							</template>
+						</div>
 
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-        <script src="../sources/justificantes.js"></script>
+					</div>
 
+					<div x-show="tab === 'consideraciones'">
+						<ol class="lista-negrita px-6" type="A">
+							<li>Todas las solicitudes de permisos que justifiquen la ausencia de los trabajadores, de acuerdo al modelo de administración (tipo de personal), deberán contar con el visto bueno del Director, Secretario, Administradores o Jefe inmediato de las entidades académicas y dependencias.</li>
+							<li>Las justificaciones del personal deberán registrarse en el módulo de registro y control de asistencia del Subsistema de Recursos Humanos (SsRH), indistintamente del medio a través del cual registren su asistencia (huella digital, tarjeta o lista de asistencia). Las justificaciones capturadas en el sistema no deberán enviarse a través del Sistema de Correspondencia Hermes.</li>
+							<li>Las incapacidades médicas deberán contener el sello de recibido de la entidad académica o dependencia en el reverso del documento. Éstas deberán capturarse en el SsRH y enviarse en original a través de la ventanilla única de oficialía de partes de la DGRH.</li>
+							<li>La documentación original que respalde las justificaciones capturadas en el SsRH deberá conservarse por lo menos 10 años para efectos de verificación por parte de los organismos fiscalizadores.</li>
+							<li>En caso de contar con personal eventual que registre asistencia a través de tarjeta o lista, únicamente se deberán reportas las incidencias a través del formato "Reporte Quincenal de Incidencias de Personal Eventual".</li>
+							<li>Con base en el Reglamento de Responsabilidades Administrativas solicitamos observar puntualmente las fechas establecidas en el presente calendario.</li>
+							<li>Los justificantes que deben de capturarse en el SsRH se especifican en la Matriz de justificaciones.</li>
+						</ol>
+					</div>
+
+					<div x-show="tab === 'tabla'">
+						<h4 class="title is-5">Tabla</h4>
+						<p>Contenido de la tabla</p>
+					</div>
+
+				</div>
+			</div>
+
+		</section>
+
+		<script src="../sources/justificantes.js"></script>
     </body>
 </html>

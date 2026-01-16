@@ -1,5 +1,5 @@
 const datos = [
-  { titulo: "1a enero", fechaTexto: "17 de enero", fechaNomina:"1a febrero", fecha: "2026-01-17" },
+  { titulo: "1a enero", fechaTexto: "17 de enero", fechaNomina:"1a febrero", fecha: "2026-01-13" },
   { titulo: "2a enero", fechaTexto: "05 de febrero", fechaNomina:"2a febrero", fecha: "2026-02-05" },
   { titulo: "1a febrero", fechaTexto: "30 de enero", fechaNomina:"1a marzo", fecha: "2026-01-30" },
   { titulo: "2a febrero", fechaTexto: "30 de enero", fechaNomina:"2a marzo", fecha: "2026-01-30" },
@@ -25,42 +25,19 @@ const datos = [
   { titulo: "2a diciembre", fechaTexto: "30 de enero", fechaNomina:"2a enero/2027", fecha: "2026-01-30" } 
 ];
 
-const hoy = new Date();
-hoy.setHours(0, 0, 0, 0);
+function fechasApp() {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
 
-const tbody = document.querySelector('#tablaFechas tbody');
-const cards = document.querySelector('#cardsFechas');
-
-datos.forEach(item => {
-  const fechaItem = new Date(item.fecha);
-  const vencida = fechaItem < hoy;
-
-  /* -------- TABLA -------- */
-  const tr = document.createElement('tr');
-  if (vencida) tr.classList.add('table-secondary', 'text-muted');
-
-  tr.innerHTML = `
-    <td>${item.titulo}</td>
-    <td>${item.fechaTexto}</td>
-    <td>${item.fechaNomina}</td>
-  `;
-  tbody.appendChild(tr);
-
-  /* -------- CARD (MÓVIL) -------- */
-  const card = document.createElement('div');
-  card.className = `card mb-2 fecha-card ${vencida ? 'fecha-vencida' : ''}`;
-
-  card.innerHTML = `
-    <div class="card-body py-2">
-      <div class="fw-semibold">${item.titulo}</div>
-      <div class="small">${item.fechaTexto}</div>
-    </div>
-  `;
-  cards.appendChild(card);
-});
-
-
+  return {
+      datos,
+      hoy,
+      esVencida(fecha) {
+      return new Date(fecha) < this.hoy;
+      }
+  }
+}
 
 function abrirPdf(){
-    window.open("../pdfs/Calendario.pdf")
+    window.open("../Public/Calendario.pdf")
 }
