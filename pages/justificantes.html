@@ -15,29 +15,31 @@
 	</head>
 	
 	<body>
-		<div class="container bg-azul pl-3">
+		<div class="layout">
+
+		<div id="encabezado" class="container bg-azul pl-3 encabezado">
 			<div class="columns is-vcentered pt-3 pl-3">
-  				<div class="column is-1">
+				<div class="column is-1">
 					<figure class="image is-64x64">
 						<img src="../Public/Logosimbolo_mini_fo.png"/>
 					</figure>
 				</div>
-  				<div class="column">
+				<div class="column">
 					<p class="has-text-white has-text-weight-medium is-size-5-tablet">Calendario de captura de justificantes en SsRH y de entrega de tarjetas de asistencia a la Dirección de Personal</p>
 				</div>
 				<div class="column is-1">
 					<a title="Versión para imprimir" onclick="abrirPdf()" class="icono-accion">
-                        <i class="fa-regular fa-file-pdf"></i>
-                    </a>
+						<i class="fa-regular fa-file-pdf"></i>
+					</a>
 				</div>
 				
 			</div>
 		</div>
 
-		<section class="section" x-data="{ tab: 'calendario' }">
-			<div class="container">
+		<div class="main" x-data="{ tab: 'calendario' }">
 
-				<!-- TABS -->
+		<section class="section tabs-fijas" >
+			<div class="container">		
 				<div class="tabs is-centered">
 					<ul>
 						<li :class="{ 'is-active': tab === 'calendario' }">
@@ -68,10 +70,14 @@
 						</li>
 					</ul>
 				</div>
+			</div>
+			</section>
 
-				<!-- CONTENIDO -->
+			<!-- CONTENIDO -->
+			<section class="section contenido-scroll">
+			<div class="container">
 				<div class="box" x-data="fechasApp()">
-
+					
 					<div x-show="tab === 'calendario'">
 						<div class="is-hidden-mobile">
 							<table class="table is-fullwidth" id="tablaFechas">
@@ -109,7 +115,7 @@
 						</div>
 
 					</div>
-
+					
 					<div x-show="tab === 'consideraciones'">
 						<ol class="lista-negrita px-6" type="A">
 							<li>Todas las solicitudes de permisos que justifiquen la ausencia de los trabajadores, de acuerdo al modelo de administración (tipo de personal), deberán contar con el visto bueno del Director, Secretario, Administradores o Jefe inmediato de las entidades académicas y dependencias.</li>
@@ -128,10 +134,11 @@
 					</div>
 
 				</div>
-			</div>
-
-		</section>
-
+			</div>		
+			</section>
+		</div>
+		
+	</div>
 		<script src="../sources/justificantes.js"></script>
     </body>
 </html>
