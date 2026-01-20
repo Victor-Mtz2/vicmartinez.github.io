@@ -1,9 +1,37 @@
+:root {
+	--azul: rgb(24,82,157);
+	--verde: rgb(40,173,86);
+}
+
+.titulo {
+	color: var(--azul);
+}
+
+.subdireccion {
+	border-left: 4px solid var(--azul);
+	cursor: pointer;
+}
+
+.jefatura-card {
+	border-left: 4px solid var(--verde);
+}
+
+.telefono {
+	color: var(--verde);
+	font-weight: 600;
+}
+
+.borde-azul { border-left: 4px solid var(--azul); }
+.borde-verde { border-left: 4px solid var(--verde); }
+.borde-gris { border-left: 4px solid gray; }
+
+
 .lista-negrita li::marker {
   font-weight: bold;
 }
 
 .bg-azul {
-  background-color: rgb(24,82,157);
+  background-color: var(--azul);
 }
 
 .icono-accion {
