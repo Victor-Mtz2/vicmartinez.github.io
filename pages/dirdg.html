@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Directorio por Tabs</title>
+
+  <link rel="stylesheet" href="../sources/bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="../sources/estilos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+
+<!-- 🔑 UN SOLO x-data -->
+<div class="main" x-data="Object.assign({ tab: 'dg' }, directorio())">
+
+  <!-- ===================== -->
+  <!-- TABS FIJAS -->
+  <!-- ===================== -->
+  <section class="section tabs-fijas">
+    <div class="container">
+      <div class="tabs is-boxed is-centered">
+        <ul>
+
+          <!-- Dirección General -->
+          <li :class="{ 'is-active': tab === 'dg' }">
+            <a @click="tab = 'dg'">
+              <span class="icon is-small">
+                <i class="fas fa-sitemap"></i>
+              </span>
+              <span class="tab-text">Dirección General</span>
+            </a>
+          </li>
+
+          <!-- Direcciones -->
+          <template x-for="(sub, i) in direccionGeneral.subdirecciones" :key="i">
+            <li :class="{ 'is-active': tab === i }">
+              <a @click="tab = i">
+                <span class="icon is-small">
+                  <i
+                    class="fas"
+                    :class="{
+                      'fa-users': sub.nombre.includes('Personal'),
+                      'fa-file-invoice-dollar': sub.nombre.includes('Nóminas'),
+                      'fa-balance-scale': sub.nombre.includes('Relaciones')
+                    }"
+                  ></i>
+                </span>
+                <span class="tab-text" x-text="sub.nombre"></span>
+              </a>
+            </li>
+          </template>
+
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- CONTENIDO -->
+  <!-- ===================== -->
+  <section class="section contenido-scroll">
+    <div class="container">
+
+      <!-- ===================== -->
+      <!-- TAB: DIRECCIÓN GENERAL -->
+      <!-- ===================== -->
+      <div x-show="tab === 'dg'" x-transition:enter="slide-enter"
+                                 x-transition:enter-start="slide-enter-start"
+                                 x-transition:enter-end="slide-enter-end"
+                                 x-transition:leave="slide-leave"
+                                 x-transition:leave-start="slide-leave-start"
+                                 x-transition:leave-end="slide-leave-end">
+
+        <!-- Directora General -->
+        <div class="box borde-azul mb-5 media">
+          <figure class="media-left image is-64x64">
+            <img :src="fotoPersona(direccionGeneral.titular)">
+          </figure>
+          <div class="media-content">
+            <p class="title is-5" x-text="direccionGeneral.titular.nombre"></p>
+            <p class="subtitle is-6" x-text="direccionGeneral.titular.puesto"></p>
+            <p class="telefono" x-text="direccionGeneral.titular.telefono"></p>
+          </div>
+        </div>
+
+        <!-- Direcciones -->
+        <p class="has-text-weight-semibold mb-3">Direcciones</p>
+        <div class="columns is-multiline mb-5">
+          <template x-for="(dir, i) in direccionGeneral.subdirectores" :key="i">
+            <div class="column is-4">
+              <div class="card borde-verde">
+                <div class="card-content is-flex">
+                  <figure class="image is-64x64 mr-4">
+                    <img :src="fotoPersona(dir)">
+                  </figure>
+                  <div>
+                    <p class="title is-6" x-text="dir.nombre"></p>
+                    <p class="subtitle is-7" x-text="dir.puesto"></p>
+                    <p class="telefono" x-text="dir.telefono"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <!-- Administración y Jefaturas -->
+        <p class="has-text-weight-semibold mb-3">Administración y Jefaturas</p>
+        <div class="columns is-multiline">
+          <template x-for="(jef, i) in direccionGeneral.jefaturas" :key="i">
+            <div class="column is-4">
+              <div class="card borde-gris">
+                <div class="card-content is-flex">
+                  <figure class="image is-64x64 mr-4">
+                    <img :src="fotoPersona(jef)">
+                  </figure>
+                  <div>
+                    <p class="title is-6" x-text="jef.nombre"></p>
+                    <p class="subtitle is-7" x-text="jef.puesto"></p>
+                    <p class="telefono" x-text="jef.telefono"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+      </div>
+
+      <!-- ===================== -->
+      <!-- TABS: CADA DIRECCIÓN -->
+      <!-- ===================== -->
+      <template x-for="(sub, index) in direccionGeneral.subdirecciones" :key="index">
+
+        <div x-show="tab === index" x-transition:enter="slide-enter"
+                                    x-transition:enter-start="slide-enter-start"
+                                    x-transition:enter-end="slide-enter-end"
+                                    x-transition:leave="slide-leave"
+                                    x-transition:leave-start="slide-leave-start"
+                                    x-transition:leave-end="slide-leave-end">
+
+          <!-- Director -->
+          <div class="box borde-verde mb-4 media">
+            <figure class="media-left image is-64x64">
+              <img :src="fotoPersona(sub.director)">
+            </figure>
+            <div class="media-content">
+              <p class="title is-6" x-text="sub.director.nombre"></p>
+              <p class="subtitle is-7" x-text="sub.director.puesto"></p>
+              <p class="telefono" x-text="sub.director.telefono"></p>
+            </div>
+          </div>
+
+          <!-- Jefaturas -->
+          <div class="columns is-multiline">
+            <template x-for="(jef, j) in sub.jefaturas" :key="j">
+              <div class="column is-4">
+                <div class="card borde-gris">
+                  <div class="card-content is-flex">
+                    <figure class="image is-64x64 mr-4">
+                      <img :src="fotoPersona(jef)">
+                    </figure>
+                    <div>
+                      <p class="is-size-7 has-text-weight-semibold mb-2" x-text="jef.Dirdep"></p>
+                      <p class="title is-6" x-text="jef.nombre"></p>
+                      <p class="subtitle is-7" x-text="jef.puesto"></p>
+                      <p class="telefono" x-text="jef.telefono"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+
+        </div>
+      </template>
+
+    </div>
+  </section>
+</div>
+
+<script src="../sources/directorio.js"></script>
+</body>
+</html>
