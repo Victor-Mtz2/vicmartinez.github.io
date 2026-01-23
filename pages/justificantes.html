@@ -17,37 +17,25 @@
 	<body>
 		<div class="layout">
 
-		<div id="encabezado" class="container bg-azul pl-3 encabezado">
-			<div class="columns is-vcentered pt-3 pl-3">
-				<div class="column is-1">
-					<figure class="image is-64x64">
-						<img src="../Public/Logosimbolo_mini_fo.png"/>
-					</figure>
-				</div>
-				<div class="column">
-					<p class="has-text-white has-text-weight-medium is-size-5-tablet">Calendario de captura de justificantes en SsRH y de entrega de tarjetas de asistencia a la Dirección de Personal</p>
-				</div>
-				<div class="column is-1">
-					<a title="Versión para imprimir" onclick="abrirPdf()" class="icono-accion">
-						<i class="fa-regular fa-file-pdf"></i>
-					</a>
-				</div>
-				
+			<div class="container box barratitulo is-flex is-align-items-center is-justify-content-center">
+				<span id="barratitulo" class="has-text-white has-text-weight-medium is-size-6-tablet">
+					Calendario para captura de justificantes en el Subsistema de Recursos Humanos (SsRH) y entrega de documentación de asistencia a la Dirección de Personal
+				</span>
 			</div>
-		</div>
+
 
 		<div class="main" x-data="{ tab: 'calendario' }">
 
 		<section class="section tabs-fijas" >
 			<div class="container">		
-				<div class="tabs is-centered">
+				<div class="tabs is-boxed is-centered">
 					<ul>
 						<li :class="{ 'is-active': tab === 'calendario' }">
 							<a @click="tab = 'calendario'">
 								<span class="icon is-small">
 									<i class="fa-regular fa-calendar-days"></i>
 								</span>
-								<span>Calendario</span>
+								<span class="tab-text">Calendario</span>
 							</a>
 						</li>
 
@@ -56,7 +44,7 @@
 								<span class="icon is-small">
 									<i class="fa-regular fa-note-sticky"></i>
 								</span>
-								<span>Consideraciones</span>
+								<span class="tab-text">Consideraciones</span>
 							</a>
 						</li>
 
@@ -65,7 +53,16 @@
 								<span class="icon is-small">
 									<i class="fa-solid fa-table-list"></i>
 								</span>
-								<span>Tabla</span>
+								<span class="tab-text">Tabla</span>
+							</a>
+						</li>
+
+						<li :class="{ 'is-active': tab === 'Imprimir' }">
+							<a @click="abrirPdf()">
+								<span class="icon is-small">
+									<i class="fa-regular fa-file-pdf"></i>
+								</span>
+								<span class="tab-text">PDF</span>
 							</a>
 						</li>
 					</ul>
@@ -76,21 +73,36 @@
 			<!-- CONTENIDO -->
 			<section class="section contenido-scroll">
 			<div class="container">
+				
 				<div class="box" x-data="fechasApp()">
 					
 					<div x-show="tab === 'calendario'">
+						<div x-data="{ open: false }">
+							<article class="message is-info mb-2">
+								<div class="message-header">
+									<p>Sobre el SsRH</p>
+									<button class="delete" aria-label="delete" @click="open = !open"></button>
+								</div>
+								<div x-show="open" class="message-body">
+									El Subsistema de Recursos Humanos (SsRH) permanece disponible de forma continua y el registro de justificantes
+									no está condicionado, siempre y cuando correspondan a una quincena posterior y que no excedan la fecha límite de
+									registro, es decir, la captura podrá efectuarse de manera anticipada desde que se cuente con el documento
+									justificativo correspondiente y hasta la fecha límite establecida en el presente calendario.
+								</div>
+							</article>
+						</div>
 						<div class="is-hidden-mobile">
-							<table class="table is-fullwidth" id="tablaFechas">
+							<table class="table is-bordered is-fullwidth tabla-simetrica" id="tablaFechas">
 								<thead>
 									<tr>
-									<th>Periodo</th>
-									<th>Recepción</th>
-									<th>Pago</th>
+									<th>Quincena que se justifica</th>
+									<th>Fechas límite de registro de justificante en el SsRH y entrega de documentación</th>
+									<th>Quincena en la que se aplica el descuento</th>
 									</tr>
 								</thead>
 								<tbody>
 									<template x-for="item in datos" :key="item.titulo">
-									<tr :class="{ 'has-background-grey-lighter has-text-grey': esVencida(item.fecha) }">
+									<tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha) }">
 										<td x-text="item.titulo"></td>
 										<td x-text="item.fechaTexto"></td>
 										<td x-text="item.fechaNomina"></td>
@@ -118,15 +130,52 @@
 					
 					<div x-show="tab === 'consideraciones'">
 						<ol class="lista-negrita px-6" type="A">
-							<li>Todas las solicitudes de permisos que justifiquen la ausencia de los trabajadores, de acuerdo al modelo de administración (tipo de personal), deberán contar con el visto bueno del Director, Secretario, Administradores o Jefe inmediato de las entidades académicas y dependencias.</li>
-							<li>Las justificaciones del personal deberán registrarse en el módulo de registro y control de asistencia del Subsistema de Recursos Humanos (SsRH), indistintamente del medio a través del cual registren su asistencia (huella digital, tarjeta o lista de asistencia). Las justificaciones capturadas en el sistema no deberán enviarse a través del Sistema de Correspondencia Hermes.</li>
-							<li>Las incapacidades médicas deberán contener el sello de recibido de la entidad académica o dependencia en el reverso del documento. Éstas deberán capturarse en el SsRH y enviarse en original a través de la ventanilla única de oficialía de partes de la DGRH.</li>
-							<li>La documentación original que respalde las justificaciones capturadas en el SsRH deberá conservarse por lo menos 10 años para efectos de verificación por parte de los organismos fiscalizadores.</li>
-							<li>En caso de contar con personal eventual que registre asistencia a través de tarjeta o lista, únicamente se deberán reportas las incidencias a través del formato "Reporte Quincenal de Incidencias de Personal Eventual".</li>
-							<li>Con base en el Reglamento de Responsabilidades Administrativas solicitamos observar puntualmente las fechas establecidas en el presente calendario.</li>
-							<li>Los justificantes que deben de capturarse en el SsRH se especifican en la Matriz de justificaciones.</li>
+							<li>Con el fin de observar los principios de legalidad e integridad que rigen el servicio público, las personas servidoras
+								públicas deberán ajustar su desempeño a los plazos establecidos en este calendario, actuando con la disciplina y
+								eficiencia que su cargo requiere conforme a la normativa vigente.</li>
+							<li>Todas las solicitudes de permisos que justifiquen la ausencia de las personas trabajadoras, de acuerdo con el
+								modelo de administración (tipo de personal), deberán contar con el visto bueno de:
+								<ol class="lista-negrita px-6" type="a">
+									<li>Personal administrativo, técnico y manual, confianza y eventual – Administrador, Personal habilitado para
+										realizar las funciones de administrador o el titular entidades académicas o dependencias.</li>
+									<li>Personal académico – Secretario -de Facultad o el titular de la entidad académica.</li>
+									<li>Mandos medios y superiores (incapacidades) – Jefe inmediato superior.</li>
+								</ol>
+							</li>
+							<li>De la documentación original que respalde las justificaciones capturadas en el SsRH se deberá realizar el
+								resguardo puntual, ordenado y mantenerla disponible para su consulta en caso de requerimiento de los entes
+								fiscalizadores, por un periodo mínimo de 7 años.</li>
+							<li>Los justificantes que deben capturarse en el SsRH se especifican en la Matriz de Justificaciones SsRH - RCA (anexo 1).</li>
+							<p class="my-4"><strong>Consideraciones particulares</strong></p>
+							<li>Los medios para la notificación de justificaciones según el modelo de administración son:</li>
+								<ol class="lista-negrita px-6" type="a">
+								<li>Para el personal administrativo, técnico y manual, confianza y eventual, deberán capturarse en el módulo
+									de Registro y control de asistencia del SsRH, indistintamente del medio a través del cual registren su
+									asistencia (huella digital, tarjeta o lista de asistencia). Las justificaciones capturadas en el sistema no
+									deberán enviarse a través del Sistema de Correspondencia Hermes.</li>
+								<li>Para el personal académico las justificaciones, deberán ser entregadas al representante sindical de la
+									entidad académica, mismas que serán entregadas a la Dirección de Personal por el FESAPAUV, de
+									conformidad a lo establecido en la Cláusula 84 del Contrato Colectivo de Trabajo.</li>
+								<li>Para Mandos medios y superiores, las incapacidades médicas, deberán capturarse en el módulo de Registro
+									y control de asistencia del SsRH y entregarlo físicamente en la ventanilla de Oficialía de Partes de la
+									Dirección General de Recursos Humanos (DGRH).</li>
+								</ol>
+							<li>Las incapacidades médicas del personal deberán contener el sello de recibido de la entidad académica o
+								dependencia en un espacio legible que no afecte la lectura de los datos, en caso limitativo, puede ser al reverso
+								del documento. Estas deberán capturarse en el SsRH y entregar físicamente el original en la ventanilla única de
+								oficialía de partes de la DGRH.</li>
+							<li>El Administrador o Personal habilitado para realizar las funciones de administrador deberán elaborar y entregarán
+								el “Reporte Quincenal de Incidencias de Personal Eventual” en ventanilla de oficialía de partes de la DGRH,
+								basándose en las tarjetas o listas de asistencia, de acuerdo al presente calendario.</li>
+							<li>Para los casos extraordinarios cuando el personal administrativo, técnico, manual exceda sus permisos
+								económicos, el Administrador o Persona habilitada para realizar funciones de administración de la entidad
+								académica o dependencia deberá informar tal situación a la DGRH a través de Sistema de Administración y
+								Seguimiento de Correspondencia (HERMES) y adjuntar el permiso económico excedido, para dar curso a la
+								recuperación.</li>
+							<li>Las tarjetas de control de asistencia del personal administrativo, técnico y manual deberán entregarse a la
+								Comisión Mixta de Control de Asistencia, acompañadas de la documentación generada en la quincena
+								correspondiente de acuerdo al presente calendario.</li>
 						</ol>
-					</div>
 
 					<div x-show="tab === 'tabla'">
 						<h4 class="title is-5">Tabla</h4>

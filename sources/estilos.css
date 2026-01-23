@@ -7,6 +7,13 @@
 	color: var(--azul);
 }
 
+.barratitulo {
+    background: linear-gradient(to right,  #28AD56, #18529D, #28AD56); 
+    height: 2rem;
+    flex-shrink: 0;
+	  max-height: 70px;
+}
+
 .subdireccion {
 	border-left: 4px solid var(--azul);
 	cursor: pointer;
@@ -44,10 +51,10 @@
   color: red;
 }
 
-.body-calendario {
-	height: 100%;
-	margin: 0;
-	overflow: hidden;
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
 .layout {
@@ -130,4 +137,25 @@
 .slide-leave-end {
   opacity: 0;
   transform: translateX(-40px);
+}
+
+.table.tabla-simetrica {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.table.tabla-simetrica th {
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+  white-space: normal;
+  background: var(--azul);
+  color:white;
+}
+
+.table.tabla-simetrica td {
+  text-align:right;
+  vertical-align: middle;
+  word-wrap: break-word;
+  white-space: normal;
 }
