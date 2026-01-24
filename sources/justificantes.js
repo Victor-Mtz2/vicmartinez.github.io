@@ -39,5 +39,5 @@ function fechasApp() {
 }
 
 function abrirPdf(){
-    window.open("../Public/Calendario.pdf")
+    window.open("../Public/CJustificantes.pdf")
 }
