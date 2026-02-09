@@ -80,9 +80,12 @@
             <img :src="fotoPersona(direccionGeneral.titular)">
           </figure>
           <div class="media-content">
-            <p class="title is-5" x-text="direccionGeneral.titular.nombre"></p>
-            <p class="subtitle is-6" x-text="direccionGeneral.titular.puesto"></p>
-            <p class="telefono" x-text="direccionGeneral.titular.telefono"></p>
+            <span class="tag is-rounded bg-azul mb-2" x-text="direccionGeneral.titular.puesto"></span>
+            <p class="title is-5 mb-1" x-text="direccionGeneral.titular.nombre"></p></br>
+            <span class="has-text-grey icon is-small"><i class="fa fa-phone" aria-hidden="true"></i></span> 
+            <span class="has-text-grey has-text-weight-semibold" x-text="direccionGeneral.titular.telefono"></span></br>
+            <span class="has-text-grey icon is-small"><i class="fa fa-envelope" aria-hidden="true"></i></span> 
+            <span class="has-text-grey has-text-weight-semibold" x-text="direccionGeneral.titular.mail"></span>
           </div>
         </div>
 
@@ -97,9 +100,12 @@
                     <img :src="fotoPersona(dir)">
                   </figure>
                   <div>
-                    <p class="title is-6" x-text="dir.nombre"></p>
-                    <p class="subtitle is-7" x-text="dir.puesto"></p>
-                    <p class="telefono" x-text="dir.telefono"></p>
+                    <span class="tag is-rounded bg-verde mb-2" x-text="dir.puesto"></span>
+                    <p class="title is-6" x-text="dir.nombre"></p></br>
+                    <span class="has-text-grey icon is-small"><i class="fa fa-phone" aria-hidden="true"></i></span> 
+                    <span class="has-text-grey has-text-weight-semibold" x-text="dir.telefono"></span></br>
+                    <span class="has-text-grey icon is-small"><i class="fa fa-envelope" aria-hidden="true"></i></span> 
+                    <span class="has-text-grey has-text-weight-semibold" x-text="dir.mail"></span>
                   </div>
                 </div>
               </div>
@@ -108,7 +114,7 @@
         </div>
 
         <!-- Administración y Jefaturas -->
-        <p class="has-text-weight-semibold mb-3">Administración y Jefaturas</p>
+        <p class="has-text-weight-semibold mb-3">Administración y Departamentos</p>
         <div class="columns is-multiline">
           <template x-for="(jef, i) in direccionGeneral.jefaturas" :key="i">
             <div class="column is-4">
@@ -118,8 +124,8 @@
                     <img :src="fotoPersona(jef)">
                   </figure>
                   <div>
+                    <span class="tag is-rounded has-background-grey has-text-white mb-2" x-text="jef.puesto"></span>
                     <p class="title is-6" x-text="jef.nombre"></p>
-                    <p class="subtitle is-7" x-text="jef.puesto"></p>
                     <p class="telefono" x-text="jef.telefono"></p>
                   </div>
                 </div>
@@ -148,13 +154,14 @@
               <img :src="fotoPersona(sub.director)">
             </figure>
             <div class="media-content">
+              <span class="tag is-rounded bg-verde mb-2" x-text="sub.director.puesto"></span>
               <p class="title is-6" x-text="sub.director.nombre"></p>
-              <p class="subtitle is-7" x-text="sub.director.puesto"></p>
               <p class="telefono" x-text="sub.director.telefono"></p>
             </div>
           </div>
 
           <!-- Jefaturas -->
+           <p class="has-text-weight-semibold mb-3">Departamentos</p>
           <div class="columns is-multiline">
             <template x-for="(jef, j) in sub.jefaturas" :key="j">
               <div class="column is-4">
@@ -164,9 +171,8 @@
                       <img :src="fotoPersona(jef)">
                     </figure>
                     <div>
-                      <p class="is-size-7 has-text-weight-semibold mb-2" x-text="jef.Dirdep"></p>
+                      <span class="tag is-rounded has-background-grey has-text-white mb-2" x-text="jef.Dirdep"></span>
                       <p class="title is-6" x-text="jef.nombre"></p>
-                      <p class="subtitle is-7" x-text="jef.puesto"></p>
                       <p class="telefono" x-text="jef.telefono"></p>
                     </div>
                   </div>
