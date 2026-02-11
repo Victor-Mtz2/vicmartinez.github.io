@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Trámites Institucionales</title>
+    <link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <!-- estilos propios -->
+	<link rel="stylesheet" type="text/css" href="../sources/cssTramites.css">
+</head>
+<body>
+
+    <section class="hero bg-azul is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title has-text-white">Portal de Trámites</h1>
+                <h2 class="subtitle has-text-white">Dirección General de Recursos Humanos</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered is-variable is-8">
+                
+                <div class="column is-4">
+                    <div class="card category-card" onclick="window.location.href='trListados.html?cat=ingreso'">
+                        <div class="card-content has-text-centered">
+                            <span class="icon is-large has-text-success">
+                                <i class="fas fa-door-open fa-3x"></i>
+                            </span>
+                            <p class="title is-4 mt-4">Ingreso</p>
+                            <p class="subtitle is-6">Trámites de registro, inscripción y alta de personal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column is-4">
+                    <div class="card category-card" onclick="window.location.href='trListados.html?cat=permanencia'">
+                        <div class="card-content has-text-centered">
+                            <span class="icon is-large has-text-info">
+                                <i class="fas fa-user-clock fa-3x"></i>
+                            </span>
+                            <p class="title is-4 mt-4">Permanencia</p>
+                            <p class="subtitle is-6">Actualización de datos, capacitaciones y promociones.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column is-4">
+                    <div class="card category-card" onclick="window.location.href='trListados.html?cat=retiro'">
+                        <div class="card-content has-text-centered">
+                            <span class="icon is-large has-text-danger">
+                                <i class="fas fa-sign-out-alt fa-3x"></i>
+                            </span>
+                            <p class="title is-4 mt-4">Retiro</p>
+                            <p class="subtitle is-6">Jubilaciones, bajas administrativas y finiquitos.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p><strong>Gestión Institucional</strong> &copy; 2026</p>
+        </div>
+    </footer>
+
+</body>
+</html>

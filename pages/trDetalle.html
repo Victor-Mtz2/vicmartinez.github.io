@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Trámites</title>
+    <link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <!-- estilos propios -->
+	<link rel="stylesheet" type="text/css" href="../sources/cssTramites.css">
+    <!-- Alpine.js -->
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+
+    <div class="container" x-data="detalleTramite()">
+        <nav class="breadcrumb mt-4" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="tramites.html">Inicio</a></li>
+                <li><a :href="'trListados.html?cat=' + tramite.rubro" x-text="tramite.rubro"></a></li>
+                <li class="is-active"><a href="#" x-text="tramite.nombre"></a></li>
+            </ul>
+        </nav>
+
+        <div class="columns">
+            <div class="column is-8">
+                <div class="box border-verde">
+                    <h1 class="title is-2" x-text="tramite.nombre"></h1>
+                    <div class="tags">
+                        <span class="tag is-link is-light" x-text="tramite.area"></span>
+                    </div>
+                    
+                    <hr>
+
+                    <div class="content is-medium">
+                        <h3 class="title is-4">Descripción del Trámite</h3>
+                        <p x-text="tramite.descripcion"></p>
+
+                        <h3 class="title is-4">Requisitos</h3>
+                        <ul>
+                            <template x-for="req in tramite.requisitos">
+                                <li x-text="req"></li>
+                            </template>
+                        </ul>
+
+                        <h3 class="title is-4">Pasos a seguir</h3>
+                        <p>Aquí puedes incluir el flujo del proceso de forma más detallada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-4">
+                <div class="card">
+                    <header class="card-header bg-azul">
+                        <p class="card-header-title has-text-white">Información General</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="block">
+                            <p class="heading">Medio de Recepción</p>
+                            <p class="subtitle is-6"><i class="fas fa-map-marker-alt text-verde"></i> <span x-text="tramite.recepcion"></span></p>
+                        </div>
+                        <div class="block">
+                            <p class="heading">Horario de Atención</p>
+                            <p class="subtitle is-6"><i class="fas fa-clock text-verde"></i> <span x-text="tramite.horario"></span></p>
+                        </div>
+                        <hr>
+                        <div class="block">
+                            <p class="heading">Descargables</p>
+                            <a :href="'../sources/docs/' + tramite.formato" class="button is-fullwidth is-success is-outlined">
+                                <span class="icon"><i class="fas fa-file-download"></i></span>
+                                <span>Descargar Formato</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../sources/datosTr.js"></script>  
+    <script src="../sources/jsTramites.js"></script>
+</body>
+</html>
