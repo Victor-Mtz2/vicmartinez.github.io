@@ -1,5 +1,3 @@
-// sources/jsTramites.js
-
 // Lógica para la LISTA de trámites
 function portalTramites() {
     return {
@@ -34,18 +32,23 @@ function portalTramites() {
 function detalleTramite() {
     return {
         tramite: {},
+        tabActiva: 'Funcionarios', // Pestaña inicial
+        tipos: TIPOS_PERSONAL,
         areas: CONFIG_AREAS,
 
         init() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-            
-            // Buscamos en la constante global de datos.js
+            const id = new URLSearchParams(window.location.search).get('id');
             this.tramite = DATOS_TRAMITES.find(t => t.id == id);
             
-            if (!this.tramite) {
-                window.location.href = 'index.html';
+            // Si el trámite no tiene variaciones, podemos manejarlo diferente
+            if (this.tramite && !this.tramite.tieneVariaciones) {
+                this.tabActiva = 'General';
             }
-        }
+        },
+
+        get requisitosAMostrar() {
+            if (!this.tramite.tieneVariaciones) return this.tramite.requisitos;
+            return this.tramite.requisitos[this.tabActiva] || [];
+        }        
     }
 }

@@ -13,14 +13,13 @@
 </head>
 <body>
 
-    <nav class="breadcrumb is-centered mt-4" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="tramites.html">Inicio</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Ingreso</a></li>
-        </ul>
-    </nav>
-
     <div class="container" x-data="portalTramites()">
+        <nav class="breadcrumb is-centered mt-4" aria-label="breadcrumbs">
+            <ul>
+                <li><a href="tramites.html">Inicio</a></li>
+                <li class="is-active"><a href="#" x-text="tituloSeccion"></a></li>
+            </ul>
+        </nav>
         <div class="columns is-centered">
             <div class="column is-9">
                 <nav class="panel is-link">
@@ -54,7 +53,7 @@
                                         </span>
                                     </div>
                                     <p class="title is-5 mb-1" x-text="tramite.nombre"></p>
-                                    <p class="subtitle is-6 has-text-grey" x-text="tramite.descripcion"></p>
+                                    <p class="subtitle is-6 has-text-grey" x-text="tramite.resumen"></p>
                                 </div>
                                 <div class="column is-narrow">
                                     <button class="button is-rounded is-small bg-azul" @click="window.location.href = 'trDetalle.html?id=' + tramite.id">
