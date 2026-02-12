@@ -20,7 +20,7 @@
             </ul>
         </nav>
 
-        <div class="columns is-multiline px-3">
+        <div class="fade-in columns is-multiline px-3">
             <div class="column is-8">
                 <div class="box border-verde" :class="areas[tramite.area].border">
                     <div class="tags">
@@ -34,7 +34,7 @@
                         <div class="mb-5">                            
                             <div class="tabs is-boxed is-small is-hidden-mobile">
                                 <ul>
-                                    <template x-for="tipo in tipos" :key="tipo">
+                                    <template x-for="tipo in tiposDisponibles" :key="tipo">
                                         <li :class="{ 'is-active': tabActiva === tipo }">
                                             <a @click="tabActiva = tipo" x-text="tipo"></a>
                                         </li>
@@ -46,14 +46,12 @@
                                 <div class="control has-icons-left">
                                     <div class="select is-fullwidth is-link">
                                         <select x-model="tabActiva">
-                                            <template x-for="tipo in tipos" :key="tipo">
+                                            <template x-for="tipo in tiposDisponibles" :key="tipo">
                                                 <option :value="tipo" x-text="tipo"></option>
                                             </template>
                                         </select>
                                     </div>
-                                    <div class="icon is-small is-left">
-                                        <i class="fas fa-user"></i>
-                                    </div>
+                                    <div class="icon is-small is-left"><i class="fas fa-user"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -67,20 +65,23 @@
                             Requisitos <span x-show="tramite.tieneVariaciones" class="has-text-link" x-text="' - ' + tabActiva"></span>
                         </h3>
                         
-                        <ul class="fade-in" :key="tabActiva">
-                            <template x-for="req in requisitosAMostrar" :key="req">
+                        <ul>
+                            <template x-for="req in contenidoDinamico.requisitos" :key="req">
                                 <li class="is-size-6" x-text="req"></li>
                             </template>
                         </ul>
 
-                        <hr>
-
-                        <h3 class="title is-6">Consideraciones</h3>
-                        <ul>
-                            <template x-for="cons in tramite.consideraciones">
-                                <li class="is-size-6" x-text="cons"></li>
-                            </template>
-                        </ul>
+                        <template x-if="contenidoDinamico.consideraciones">
+                            <div class="block">
+                                <hr>
+                                <h3 class="title is-6">Consideraciones Especiales</h3>
+                                <ul>
+                                    <template x-for="cons in contenidoDinamico.consideraciones" :key="cons">
+                                        <li class="is-size-6" x-text="cons"></li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -93,11 +94,14 @@
                     <div class="card-content">
                         <div class="block">
                             <p class="heading">Medio de Recepción</p>
-                            <p class="subtitle is-6">
+                            <div class="subtitle is-6">
                                 <i class="fas fa-map-marker-alt text-verde mr-2"></i> 
-                                <span x-text="tramite.recepcion"></span>
-                            </p>
+                                <template x-for="rec in contenidoDinamico.recepcion" :key="rec">
+                                    <span x-text="rec"></span>
+                                </template>
+                            </div>
                         </div>
+
                         <div class="block">
                             <p class="heading">Horario de Atención</p>
                             <p class="subtitle is-6">
@@ -105,17 +109,19 @@
                                 <span x-text="tramite.horario"></span>
                             </p>
                         </div>
-                        <hr>
-                        <div class="block" x-if="tramite.formato">
-                            <p class="heading">Documentación</p>
-                            <a :href="tramite.formato" class="button is-fullwidth is-success is-outlined" target="_blank">
-                                <span class="icon"><i class="fas fa-file-download"></i></span>
-                                <span>Descargar Formato Oficial</span>
-                            </a>
-                        </div>
+
+                        <template x-if="tramite.formato">
+                            <div class="block">
+                                <hr>
+                                <p class="heading">Documentación</p>
+                                <a :href="tramite.formato" class="button is-fullwidth is-success is-outlined" target="_blank">
+                                    <span class="icon"><i class="fas fa-file-download"></i></span>
+                                    <span>Descargar Formato Oficial</span>
+                                </a>
+                            </div>
+                        </template>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>

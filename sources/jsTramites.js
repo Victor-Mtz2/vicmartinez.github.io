@@ -32,23 +32,46 @@ function portalTramites() {
 function detalleTramite() {
     return {
         tramite: {},
-        tabActiva: 'Funcionarios', // Pestaña inicial
-        tipos: TIPOS_PERSONAL,
         areas: CONFIG_AREAS,
+        tabActiva: '',
 
         init() {
             const id = new URLSearchParams(window.location.search).get('id');
-            this.tramite = DATOS_TRAMITES.find(t => t.id == id);
+            this.tramite = DATOS_TRAMITES.find(t => t.id == id) || {};
             
-            // Si el trámite no tiene variaciones, podemos manejarlo diferente
-            if (this.tramite && !this.tramite.tieneVariaciones) {
-                this.tabActiva = 'General';
+            // Si hay variaciones, la pestaña activa inicial será la primera que exista en requisitos
+            if (this.tramite.tieneVariaciones) {
+                this.tabActiva = Object.keys(this.tramite.requisitos)[0];
             }
         },
 
-        get requisitosAMostrar() {
-            if (!this.tramite.tieneVariaciones) return this.tramite.requisitos;
-            return this.tramite.requisitos[this.tabActiva] || [];
-        }        
+        // Devuelve solo los tipos de personal que tienen datos definidos en el trámite
+        get tiposDisponibles() {
+            if (!this.tramite.tieneVariaciones) return [];
+            return Object.keys(this.tramite.requisitos);
+        },
+
+        // Centraliza la lógica de qué mostrar según la pestaña
+        get contenidoDinamico() {
+            if (!this.tramite.id) return {};
+
+            // Si no hay variaciones, devolvemos el dato directo
+            if (!this.tramite.tieneVariaciones) {
+                return {
+                    requisitos: this.tramite.requisitos,
+                    consideraciones: this.tramite.consideraciones,
+                    recepcion: Array.isArray(this.tramite.recepcion) ? this.tramite.recepcion : [this.tramite.recepcion]
+                };
+            }
+
+            // Si hay variaciones, buscamos por la llave de la pestaña activa
+            return {
+                requisitos: this.tramite.requisitos[this.tabActiva] || [],
+                consideraciones: this.tramite.consideraciones ? this.tramite.consideraciones[this.tabActiva] : null,
+                recepcion: this.tramite.recepcion ? 
+                           (Array.isArray(this.tramite.recepcion[this.tabActiva]) ? 
+                            this.tramite.recepcion[this.tabActiva] : [this.tramite.recepcion[this.tabActiva]]) : []
+            };
+        }
     }
 }
