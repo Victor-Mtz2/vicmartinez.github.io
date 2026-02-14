@@ -24,12 +24,43 @@
             <div class="column is-9">
                 <nav class="panel is-link">
                     <p class="panel-heading bg-azul" x-text="'Trámites de ' + tituloSeccion"></p>
-                    <div class="panel-block">
-                        <p class="control has-icons-left">
-                            <input class="input" type="text" placeholder="Filtrar trámites..." x-model="search">
-                            <span class="icon is-left"><i class="fas fa-search"></i></span>
-                        </p>
+<div class="box">
+    <div class="columns is-vcentered">
+        <div class="column is-6">
+            <div class="field">
+                <div class="control has-icons-left">
+                    <input 
+                        class="input" 
+                        type="text" 
+                        placeholder="Buscar trámite..." 
+                        x-model="search"
+                    >
+                    <span class="icon is-left">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-6">
+            <div class="field">
+                <div class="control has-icons-left">
+                    <div class="select is-fullwidth">
+                        <select x-model="filtroArea">
+                            <option value="todas">Todas las áreas</option>
+                            <template x-for="(info, nombre) in areas" :key="nombre">
+                                <option :value="nombre" x-text="nombre"></option>
+                            </template>
+                        </select>
                     </div>
+                    <div class="icon is-left">
+                        <i class="fas fa-building"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
                     <template x-if="cargando">
                         <div class="p-4">

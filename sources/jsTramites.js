@@ -2,11 +2,12 @@
 function portalTramites() {
     return {
         search: '',
+        filtroArea: 'todas', // Valor inicial
         cargando: true,
         categoriaActiva: new URLSearchParams(window.location.search).get('cat') || 'ingreso',
         
-        areas: CONFIG_AREAS, // Lee del archivo datos.js
-        tramites: DATOS_TRAMITES, // Lee del archivo datos.js
+        areas: CONFIG_AREAS,
+        tramites: DATOS_TRAMITES,
 
         init() {
             setTimeout(() => { this.cargando = false; }, 500);
@@ -14,10 +15,16 @@ function portalTramites() {
 
         get filteredTramites() {
             return this.tramites.filter(t => {
-                const mismoRubro = t.rubro === this.categoriaActiva;
-                const coincideBusqueda = t.nombre.toLowerCase().includes(this.search.toLowerCase()) || 
-                                       t.area.toLowerCase().includes(this.search.toLowerCase());
-                return mismoRubro && coincideBusqueda;
+                // 1. Debe ser de la categoría (ingreso/permanencia/retiro)
+                const cumpleCat = t.rubro === this.categoriaActiva;
+
+                // 2. Debe coincidir con el texto escrito
+                const cumpleTexto = t.nombre.toLowerCase().includes(this.search.toLowerCase());
+
+                // 3. Debe coincidir con el área (si no es "todas")
+                const cumpleArea = this.filtroArea === 'todas' || t.area === this.filtroArea;
+
+                return cumpleCat && cumpleTexto && cumpleArea;
             });
         },
 
@@ -27,6 +34,8 @@ function portalTramites() {
         }
     }
 }
+
+
 
 // Lógica para el DETALLE del trámite
 function detalleTramite() {
