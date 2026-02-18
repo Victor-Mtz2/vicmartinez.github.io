@@ -1,8 +1,9 @@
 // sources/datos.js
 const DATOS_TRAMITES = [
     { 
-        id: 1, 
-        rubro: 'permanencia', 
+        id: 1,
+        grupo: 'DN',
+        rubro: 'Permanencia', 
         nombre: 'Adhesión o mantenimiento al sistema de pago de nómina por depósito bancario', 
         area: 'Dirección de Nóminas', 
         resumen: 'Alta o modificación de número de tarjeta bancaria para el pago de la nómina.',
@@ -14,8 +15,9 @@ const DATOS_TRAMITES = [
         formato: 'https://www.uv.mx/dgrh/files/2023/02/Formato-adhesion-a-la-nomina-arh-p-f-70-A.pdf'
     },
     { 
-        id: 2, 
-        rubro: 'permanencia', 
+        id: 2,
+        grupo: 'DP',
+        rubro: 'Permanencia', 
         nombre: 'Licencia sin goce de sueldo Académica', 
         area: 'Dirección de Personal', 
         resumen: 'Licencias sin goce de sueldo en experiencia educativa, tiempo completo y medio tiempo',
@@ -31,8 +33,9 @@ const DATOS_TRAMITES = [
         formato: ''
     },
     { 
-        id: 3, 
-        rubro: 'retiro', 
+        id: 3,
+        grupo: 'DRL',
+        rubro: 'Retiro', 
         nombre: 'Pago de prestaciones por terminación de la relación de trabajo', 
         area: 'Dirección de Relaciones Laborales', 
         resumen: 'Conclución de la relación de trabajo.',
@@ -48,8 +51,9 @@ const DATOS_TRAMITES = [
         formato: ''
     },
     { 
-        id: 4, 
-        rubro: 'permanencia', 
+        id: 4,
+        grupo: 'DP',
+        rubro: 'Permanencia', 
         nombre: 'Permiso económico', 
         area: 'Dirección de Personal', 
         resumen: '',
@@ -75,12 +79,11 @@ const DATOS_TRAMITES = [
     }
 ];
 
-const CONFIG_AREAS = {
-    'Dirección de Personal': { color: 'is-link', icon: 'fa-user-tie', border: 'border-personal' },
-    'Dirección de Nóminas': { color: 'is-success', icon: 'fa-money-check-alt', border: 'border-nominas' },
-    'Dirección de Relaciones Laborales': { color: 'is-warning', icon: 'fa-handshake', border: 'border-relaciones' },
-    'Evaluación y desarrollo': { color: 'is-danger', icon: 'fa-chart-line', border: 'border-evaluacion' },
-    'Asuntos tecnicos': { color: 'is-info', icon: 'fa-tools', border: 'border-tecnicos' }
+const CONFIG_RUBROS = {
+    'Ingreso': { color: 'is-success', icon: 'fa-money-check-alt', border: 'border-nominas' },
+    'Permanencia': { color: 'is-info', icon: 'fa-tools', border: 'border-tecnicos' },
+    'Retiro': { color: 'is-danger', icon: 'fa-chart-line', border: 'border-evaluacion' },
+    'General': { color: 'is-warning', icon: 'fa-handshake', border: 'border-relaciones' }
 };
 
 const TIPOS_PERSONAL = ['Funcionarios', 'ATM', 'Confianza', 'Académico', 'Eventual'];

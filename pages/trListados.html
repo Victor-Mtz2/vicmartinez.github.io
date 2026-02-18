@@ -23,44 +23,45 @@
         <div class="columns is-centered">
             <div class="column is-9">
                 <nav class="panel is-link">
-                    <p class="panel-heading bg-azul" x-text="'Trámites de ' + tituloSeccion"></p>
-<div class="box">
-    <div class="columns is-vcentered">
-        <div class="column is-6">
-            <div class="field">
-                <div class="control has-icons-left">
-                    <input 
-                        class="input" 
-                        type="text" 
-                        placeholder="Buscar trámite..." 
-                        x-model="search"
-                    >
-                    <span class="icon is-left">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </div>
-            </div>
-        </div>
+                    <p class="panel-heading bg-azul" x-text="tituloSeccion"></p>
 
-        <div class="column is-6">
-            <div class="field">
-                <div class="control has-icons-left">
-                    <div class="select is-fullwidth">
-                        <select x-model="filtroArea">
-                            <option value="todas">Todas las áreas</option>
-                            <template x-for="(info, nombre) in areas" :key="nombre">
-                                <option :value="nombre" x-text="nombre"></option>
-                            </template>
-                        </select>
+                    <div class="box">
+                        <div class="columns is-vcentered">
+                            <div class="column is-12">
+                                <div class="field">
+                                    <div class="control has-icons-left">
+                                        <input 
+                                            class="input" 
+                                            type="text" 
+                                            placeholder="Buscar trámite..." 
+                                            x-model="search"
+                                        >
+                                        <span class="icon is-left">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="column is-6">
+                                <div class="field">
+                                    <div class="control has-icons-left">
+                                        <div class="select is-fullwidth">
+                                            <select x-model="filtroArea">
+                                                <option value="todas">Todas las áreas</option>
+                                                <template x-for="(info, nombre) in areas" :key="nombre">
+                                                    <option :value="nombre" x-text="nombre"></option>
+                                                </template>
+                                            </select>
+                                        </div>
+                                        <div class="icon is-left">
+                                            <i class="fas fa-building"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
                     </div>
-                    <div class="icon is-left">
-                        <i class="fas fa-building"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
                     <template x-if="cargando">
                         <div class="p-4">
@@ -72,15 +73,12 @@
 
                     <div x-show="!cargando" class="fade-in">
                     <template x-for="tramite in filteredTramites" :key="tramite.id">
-                        <div class="panel-block is-block" :class="areas[tramite.area].border">
+                        <div class="panel-block is-block" :class="rubros[tramite.rubro].border">
                             <div class="columns is-vcentered is-mobile">
                                 <div class="column">
                                     <div class="is-flex is-align-items-center mb-2">
-                                        <span class="tag is-light is-medium" :class="areas[tramite.area].color">
-                                            <span class="icon is-small mr-2">
-                                                <i class="fas" :class="areas[tramite.area].icon"></i>
-                                            </span>
-                                            <span x-text="tramite.area"></span>
+                                        <span class="tag is-light is-medium" :class="rubros[tramite.rubro].color">
+                                            <span x-text="tramite.rubro"></span>
                                         </span>
                                     </div>
                                     <p class="title is-5 mb-1" x-text="tramite.nombre"></p>

@@ -4,9 +4,9 @@ function portalTramites() {
         search: '',
         filtroArea: 'todas', // Valor inicial
         cargando: true,
-        categoriaActiva: new URLSearchParams(window.location.search).get('cat') || 'ingreso',
+        categoriaActiva: new URLSearchParams(window.location.search).get('cat') || 'DP',
         
-        areas: CONFIG_AREAS,
+        rubros: CONFIG_RUBROS,
         tramites: DATOS_TRAMITES,
 
         init() {
@@ -16,20 +16,24 @@ function portalTramites() {
         get filteredTramites() {
             return this.tramites.filter(t => {
                 // 1. Debe ser de la categoría (ingreso/permanencia/retiro)
-                const cumpleCat = t.rubro === this.categoriaActiva;
+                const cumpleCat = t.grupo === this.categoriaActiva;
 
                 // 2. Debe coincidir con el texto escrito
                 const cumpleTexto = t.nombre.toLowerCase().includes(this.search.toLowerCase());
 
                 // 3. Debe coincidir con el área (si no es "todas")
-                const cumpleArea = this.filtroArea === 'todas' || t.area === this.filtroArea;
+                //const cumpleArea = this.filtroArea === 'todas' || t.area === this.filtroArea;
 
-                return cumpleCat && cumpleTexto && cumpleArea;
+                return cumpleCat && cumpleTexto;// && cumpleArea;
             });
         },
 
         get tituloSeccion() {
-            const titulos = { 'ingreso': 'Ingreso', 'permanencia': 'Permanencia', 'retiro': 'Retiro' };
+            const titulos = {'DP':'Dirección de Personal',
+                             'DN': 'Dirección de Nóminas',
+                             'DRL':'Dirección de Relaciones Laborales',
+                             'ED':'Evaluación y Desarrollo de Personal',
+                             'AT':'Asuntos Técnicos'};
             return titulos[this.categoriaActiva] || 'Trámites';
         }
     }
@@ -41,7 +45,7 @@ function portalTramites() {
 function detalleTramite() {
     return {
         tramite: {},
-        areas: CONFIG_AREAS,
+        rubros: CONFIG_RUBROS,
         tabActiva: '',
 
         init() {

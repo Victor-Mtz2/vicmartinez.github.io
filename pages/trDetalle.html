@@ -15,16 +15,16 @@
         <nav class="breadcrumb mt-4 px-3" aria-label="breadcrumbs">
             <ul>
                 <li><a href="tramites.html">Inicio</a></li>
-                <li><a :href="'trListados.html?cat=' + tramite.rubro" x-text="tramite.rubro"></a></li>
+                <li><a :href="'trListados.html?cat=' + tramite.grupo" x-text="tramite.area"></a></li>
                 <li class="is-active"><a href="#" x-text="tramite.nombre"></a></li>
             </ul>
         </nav>
 
         <div class="fade-in columns is-multiline px-3">
             <div class="column is-8">
-                <div class="box border-verde" :class="areas[tramite.area].border">
+                <div class="box" :class="rubros[tramite.rubro].border">
                     <div class="tags">
-                        <span class="tag is-light" :class="areas[tramite.area].color" x-text="tramite.area"></span>
+                        <span class="tag is-light" :class="rubros[tramite.rubro].color" x-text="tramite.rubro"></span>
                     </div>
                     <h1 class="title is-4" x-text="tramite.nombre"></h1>
                     
