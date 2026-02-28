@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Gestión académica</title>
+		<!-- estilos Bulma -->
+		<link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+        <!-- estilos propios -->
+		<link rel="stylesheet" type="text/css" href="../sources/cssGestAcad.css">
+		<!-- iconos -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Alpine.js -->
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	</head>
+	
+	<body>
+		<div class="layout">
+
+			<div class="container box barratitulo is-flex is-align-items-center is-justify-content-center">
+				<span id="barratitulo" class="has-text-white has-text-weight-medium is-size-6-tablet">
+					Gestión académica
+				</span>
+			</div>
+
+
+			<div class="main" x-data="{ tab: 'crono' }">
+
+                <section class="section tabs-fijas my-0 pt-2">
+                    <div class="container">		
+                        <div class="tabs is-boxed is-centered">
+                            <ul>
+                                <li :class="{ 'is-active': tab === 'crono' }">
+                                    <a @click="tab = 'crono'">
+                                        <span class="icon is-small">
+                                            <i class="fa-regular fa-calendar-days"></i>
+                                        </span>
+                                        <span class="tab-text">Cronograma</span>
+                                    </a>
+                                </li>
+
+                                <li :class="{ 'is-active': tab === 'convocatorias' }">
+                                    <a @click="tab = 'convocatorias'">
+                                        <span class="icon is-small">
+                                            <i class="fa-regular fa-note-sticky"></i>
+                                        </span>
+                                        <span class="tab-text">Convocatorias</span>
+                                    </a>
+                                </li>
+
+                                <li :class="{ 'is-active': tab === 'il' }">
+                                    <a @click="tab = 'il'">
+                                        <span class="icon is-small">
+                                            <i class="fa-solid fa-table-list"></i>
+                                        </span>
+                                        <span class="tab-text">Inscripción en línea</span>
+                                    </a>
+                                </li>
+
+                                <li :class="{ 'is-active': tab === 'procesosil' }">
+                                    <a @click="tab = 'procesosil'">
+                                        <span class="icon is-small">
+                                            <i class="fa-solid fa-table-list"></i>
+                                        </span>
+                                        <span class="tab-text">Procesos IL</span>
+                                    </a>
+                                </li>
+                                <li :class="{ 'is-active': tab === 'cargasacad' }">
+                                    <a @click="tab = 'cargasacad'">
+                                        <span class="icon is-small">
+                                            <i class="fa-solid fa-table-list"></i>
+                                        </span>
+                                        <span class="tab-text">Revisión de Cargas Académicas</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CONTENIDO -->
+                <section class="section mt-0 pt-0">
+                    <div class="container">
+                    
+                        <div class="box" x-data="cronogramaApp()">
+                        
+                            <div x-show="tab === 'crono'">
+                                                        
+                                <div class="field mb-4">
+                                    <p class="control has-icons-left">
+                                        <input class="input is-rounded" type="text" placeholder="Buscar actividad o responsable..." x-model="busqueda">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-search"></i>
+                                        </span>
+                                    </p>
+                                </div>
+
+                                <div class="table-container box p-0" style="overflow-x: auto;">
+                                    <table class="table is-bordered is-striped is-hoverable is-fullwidth is-narrow">
+                                        <thead>
+                                            <tr class="has-background-link">
+                                                <th class="has-text-white has-text-centered is-size-7" style="width: 50px;">ID</th>
+                                                <th class="has-text-white is-size-7" style="width: 150px;">Responsable</th>
+                                                <th class="has-text-white is-size-7">Actividad / Proceso</th>
+                                                <template x-for="mes in meses" :key="mes">
+                                                    <th class="has-text-white has-text-centered is-capitalized is-size-7" 
+                                                        style="width: 80px;" 
+                                                        x-text="mes.substring(0,3)"></th>
+                                                </template>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template x-for="item in datosFiltrados" :key="item.id">
+                                                <tr>
+                                                    <td x-text="item.id" class="has-text-centered is-size-7"></td>
+                                                    <td>
+                                                        <span class="tag is-info is-light is-size-7" style="white-space: normal;" x-text="item.responsable"></span>
+                                                    </td>
+                                                    <td class="is-size-7">
+                                                        <div class="has-text-weight-semibold" x-text="item.actividad"></div>
+                                                        <div x-show="item.proceso" class="is-size-7 has-text-grey mt-1">
+                                                            <i class="fas fa-project-diagram mr-1"></i><span x-text="item.proceso"></span>
+                                                        </div>
+                                                    </td>
+                                                    <template x-for="mes in meses" :key="mes">
+                                                        <td class="has-text-centered is-size-7" :class="claseCelda(item[mes])">
+                                                            <span x-text="item[mes] || '-'"></span>
+                                                        </td>
+                                                    </template>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+
+                                
+                            </div>
+                            
+
+                        </div>
+                    </div>		
+                </section>
+		</div>
+		
+	</div>
+		<script src="../sources/datosGestAcad.js"></script>
+        <script src="../sources/jsGestAcad.js"></script>
+    </body>
+</html>

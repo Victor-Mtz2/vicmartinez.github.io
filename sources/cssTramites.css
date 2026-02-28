@@ -61,3 +61,17 @@
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
+
+.tabs.is-boxed li.is-active a {
+    background-color: rgb(24,82,157);
+    color: #fff;
+    font-weight: 600;
+}
+
+.tabs.is-boxed li a {
+    color: rgb(24,82,157);
+}
+
+.tabs.is-boxed li a:hover {
+    background-color: rgba(24,82,157, 0.08);
+}
