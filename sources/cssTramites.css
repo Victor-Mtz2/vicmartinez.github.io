@@ -16,7 +16,7 @@
 
 .bg-azul { 
     background-color: var(--azul) !important;
-     color: white !important; 
+    color: white !important; 
 }
 
 .text-verde { color: var(--verde) !important; }

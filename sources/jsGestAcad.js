@@ -2,9 +2,8 @@ const cronogramaApp = () => {
     return {
         meses: ['marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto'],
         datos: CRONO,
-        busqueda: '', // Para filtrar actividades
-        
-        // Función para filtrar en tiempo real
+        busqueda: '',
+
         get datosFiltrados() {
             return this.datos.filter(i => 
                 i.actividad.toLowerCase().includes(this.busqueda.toLowerCase()) ||
@@ -12,11 +11,84 @@ const cronogramaApp = () => {
             );
         },
 
-        // Color dinámico: si la celda tiene texto (fecha), resaltarla
         claseCelda(valor) {
-            return valor && valor.trim() !== "" 
-                ? 'has-background-link-light has-text-weight-bold has-text-link' 
-                : 'has-text-grey-lighter';
+            return valor && valor !== ""
+                ? 'has-background-info-light has-text-weight-bold has-text-link'
+                : 'has-text-grey';
         }
     }
+}
+
+
+const convocatoriasApp = () => {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const datos = CONVOCATORIAS;
+
+  return {
+    datos,
+    hoy,
+
+    esVencida(fechaStr) {
+      const [anio, mes, dia] = fechaStr.split('-').map(Number);
+      const fechaLocal = new Date(anio, mes - 1, dia);
+      return fechaLocal < this.hoy;
+    }
+  }
+}
+
+const ilineaApp = () => {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const datos = ILINEA;
+
+  return {
+    datos,
+    hoy,
+
+    esVencida(fechaStr) {
+      const [anio, mes, dia] = fechaStr.split('-').map(Number);
+      const fechaLocal = new Date(anio, mes - 1, dia);
+      return fechaLocal < this.hoy;
+    }
+  }
+}
+
+
+const caracadApp = () => {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const datos = CARACAD;
+
+  return {
+    datos,
+    hoy,
+
+    esVencida(fechaStr) {
+      const [anio, mes, dia] = fechaStr.split('-').map(Number);
+      const fechaLocal = new Date(anio, mes - 1, dia);
+      return fechaLocal < this.hoy;
+    }
+  }
+}
+
+const caracaddpApp = () => {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const datos = CARACADDP;
+
+  return {
+    datos,
+    hoy,
+
+    esVencida(fechaStr) {
+      const [anio, mes, dia] = fechaStr.split('-').map(Number);
+      const fechaLocal = new Date(anio, mes - 1, dia);
+      return fechaLocal < this.hoy;
+    }
+  }
 }

@@ -7,6 +7,11 @@
 	color: var(--azul);
 }
 
+.bg-azul { 
+    background-color: var(--azul) !important;
+    color: white !important; 
+}
+
 .barratitulo {
     background: linear-gradient(to right,  #28AD56, #18529D, #28AD56); 
     height: 2rem;
@@ -28,31 +33,13 @@
     background-color: rgba(24,82,157, 0.08);
   }
 
+
 /* Hacer que el encabezado de la tabla sea fijo al hacer scroll */
 .table-container {
     max-height: 70vh; /* Altura máxima para que quepa en pantalla */
     overflow-y: auto;
 }
 
-
-.table.tabla-simetrica th {
-  text-align: center;
-  vertical-align: middle;
-  word-wrap: break-word;
-  white-space: normal;
-  background: var(--azul);
-  color:white;
-}
-
-
-.table thead th {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    background: var(--azul);
-    color:white;
-    vertical-align: middle;
-}
 
 /* Estilo para las etiquetas de responsables */
 .tag.is-info.is-light {
@@ -63,7 +50,133 @@
     width: 100%;
 }
 
-/* Mejora visual para las celdas con fecha */
-.has-background-link-light {
-    border: 1px solid #d1e1ff !important;  
+
+
+/*----------*/
+
+/* CONTENEDOR GENERAL */
+.cronograma-dashboard {
+    padding: 1rem;
+}
+
+/* CARD MODERNA */
+.shadow-dashboard {
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    border: none;
+}
+
+/* ENCABEZADO SUPERIOR */
+.nivel-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.titulo-dashboard {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #363636;
+}
+
+/* TABLA */
+.tabla-dashboard {
+    font-size: 0.85rem;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.tabla-small {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+
+/* HEADERS */
+.tabla-dashboard thead th {
+    vertical-align: middle;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+    border-bottom: 2px solid #e5e7eb;
+    background: var(--azul);
+    color:white;
+}
+
+/* Primera fila */
+.tabla-dashboard thead tr:first-child th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+/* Segunda fila (meses) */
+.tabla-dashboard thead tr:nth-child(2) th {
+    position: sticky;
+    top: 36px; /* igual a la altura de la primera fila */
+    z-index: 2;
+}
+
+
+/* FILAS */
+.tabla-dashboard tbody tr {
+    transition: all 0.15s ease;
+}
+
+.tabla-dashboard tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* COLUMNAS */
+.col-id {
+    width: 5%;
+    text-align: center;
+}
+
+.col-actividad {
+    width: 25%;
+}
+
+.col-responsable {
+    width: 15%;
+    text-align: center;
+}
+
+.col-mes {
+    width: 7%;
+    text-align: center;
+}
+
+
+/* CELDAS */
+.actividad {
+    font-weight: 500;
+}
+
+.responsable {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+.celda-fecha {
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* CELDAS VACÍAS */
+.celda-vacia {
+    color: #d1d5db;
+    font-size: 0.8rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nivel-superior {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
