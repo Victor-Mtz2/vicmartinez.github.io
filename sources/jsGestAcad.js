@@ -1,6 +1,6 @@
 const cronogramaApp = () => {
     return {
-        meses: ['marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto'],
+        meses: ['marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre'],
         datos: CRONO,
         busqueda: '',
 
@@ -11,9 +11,9 @@ const cronogramaApp = () => {
             );
         },
 
-        claseCelda(valor) {
+        claseCelda(valor, index) {
             return valor && valor !== ""
-                ? 'has-background-info-light has-text-weight-bold has-text-link'
+                ? `bg-m${index} has-text-weight-bold has-text-link`
                 : 'has-text-grey';
         }
     }

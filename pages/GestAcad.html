@@ -17,12 +17,6 @@
 	<body>
 		<div class="layout">
 
-			<!--<div class="container box barratitulo is-flex is-align-items-center is-justify-content-center">
-				<span id="barratitulo" class="has-text-white has-text-weight-medium is-size-6-tablet">
-					Gestión académica
-				</span>
-			</div>-->
-
             <section class="hero is-small bg-azul is-bold mb-3">
                 <div class="hero-body">
                     <div class="container has-text-centered">
@@ -111,11 +105,11 @@
                                                         <th class="col-id has-text-centered" rowspan="2">Núm.</th>
                                                         <th class="col-actividad has-text-centered" rowspan="2">Actividad</th>
                                                         <th class="col-responsable has-text-centered" rowspan="2">Responsable</th>
-                                                        <th class="col-mes has-text-centered" colspan="6">2026</th>
+                                                        <th class="col-mes has-text-centered" :colspan="meses.length">2026</th>
                                                     </tr>
                                                     <tr>
                                                         <template x-for="mes in meses" :key="mes">
-                                                            <th class="col-mes has-text-centered" x-text="mes"></th>
+                                                            <th class="col-mes has-text-centered bg-verde" x-text="mes"></th>
                                                         </template>
                                                     </tr>
                                                 </thead>
@@ -132,8 +126,8 @@
                                                             </td>
                                                             <td class="responsable" x-text="item.responsable"></td>
 
-                                                            <template x-for="mes in meses" :key="mes">
-                                                                <td class="has-text-centered is-size-7" :class="claseCelda(item[mes])">
+                                                            <template x-for="(mes, index) in meses" :key="index">
+                                                                <td class="has-text-centered is-size-7" :class="claseCelda(item[mes], index)">
                                                                     <span x-text="item[mes] || '-'"></span> 
                                                                 </td>
                                                             </template>
@@ -159,15 +153,15 @@
                                             <table class="table tabla-dashboard tabla-small">
                                                 <thead>
                                                     <tr>
-                                                        <th class="has-text-centered">Actividad</th>
-                                                        <th class="has-text-centered">Fecha</th>
+                                                        <th class="col-actividad-small has-text-centered">Actividad</th>
+                                                        <th class="col-fecha-small has-text-centered">Fecha</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <template x-for="item in datos" :key="item.titulo">
                                                         <tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha) }">
                                                             <td class="has-text-weight-semibold" x-text="item.titulo"></td>
-                                                            <td x-text="item.fechaTexto"></td>
+                                                            <td class="has-text-right" x-text="item.fechaTexto"></td>
                                                         </tr>
                                                     </template>
                                                 </tbody>
@@ -207,7 +201,7 @@
                                                                 </div>
                                                             </td>
                                                             <td class="responsable" x-text="item.responsable"></td>
-                                                            <td x-text="item.fechaTexto"></td>
+                                                            <td class="has-text-right" x-text="item.fechaTexto"></td>
                                                         </tr>
                                                     </template>
                                                 </tbody>
@@ -230,15 +224,15 @@
                                             <table class="table tabla-dashboard tabla-small">
                                                 <thead>
                                                     <tr>
-                                                        <th class="has-text-centered">Actividad</th>
-                                                        <th class="has-text-centered">Fecha</th>
+                                                        <th class="col-actividad-small has-text-centered">Actividad</th>
+                                                        <th class="col-fecha-small has-text-centered">Fecha</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <template x-for="item in datos" :key="item.titulo">
                                                         <tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha) }">
                                                             <td class="has-text-weight-semibold" x-text="item.titulo"></td>
-                                                            <td x-text="item.fechaTexto"></td>
+                                                            <td class="has-text-right" x-text="item.fechaTexto"></td>
                                                         </tr>
                                                     </template>
                                                 </tbody>

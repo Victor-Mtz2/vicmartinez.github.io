@@ -12,11 +12,44 @@
     color: white !important; 
 }
 
+.bg-verde { 
+    background-color: var(--verde) !important;
+    color: white !important; 
+}
+
 .barratitulo {
     background: linear-gradient(to right,  #28AD56, #18529D, #28AD56); 
     height: 2rem;
     flex-shrink: 0;
 	  max-height: 70px;
+}
+
+.bg-m0 {
+    background: linear-gradient(to right, rgb(68, 180, 255), rgb(122, 202, 255)); 
+}
+
+.bg-m1 {
+    background: linear-gradient(to right, rgb(122, 202, 255), rgb(154, 214, 255)); 
+}
+
+.bg-m2 {
+    background: linear-gradient(to right, rgb(154, 214, 255), rgb(174, 223, 255)); 
+}
+
+.bg-m3 {
+    background: linear-gradient(rgb(174, 223, 255)); 
+}
+
+.bg-m4 {
+    background: linear-gradient(to right, rgb(174, 223, 255), rgb(154, 214, 255)); 
+}
+
+.bg-m5 {
+    background: linear-gradient(to right, rgb(154, 214, 255), rgb(122, 202, 255)); 
+}
+
+.bg-m6 {
+    background: linear-gradient(to right, rgb(122, 202, 255), rgb(68, 180, 255)); 
 }
 
 .tabs.is-boxed li.is-active a {
@@ -151,6 +184,13 @@
     text-align: center;
 }
 
+.col-actividad-small{
+    width: 70%;
+}
+
+.col-frecha-small{
+    width: 30%;
+}
 
 /* CELDAS */
 .actividad {
@@ -165,6 +205,11 @@
 .celda-fecha {
     vertical-align: middle;
     text-align: center;
+}
+
+.celda-fechatexto {
+    vertical-align: middle;
+    text-align: end;
 }
 
 /* CELDAS VACÍAS */
