@@ -92,3 +92,28 @@ const caracaddpApp = () => {
     }
   }
 }
+
+function convocatoriasApp2() {
+    const datos = CARACADDP;
+
+    const hoy = new Date();
+    hoy.setHours(0,0,0,0);
+
+    return{
+
+        datos,
+        hoy,
+
+        esVencida(fecha){
+            const f = new Date(fecha + "T00:00:00");
+            return f < this.hoy;
+        },
+
+        esHoy(fecha){
+            const f = new Date(fecha + "T00:00:00");
+            return f.getTime() === this.hoy.getTime();
+        }
+
+    }
+
+}

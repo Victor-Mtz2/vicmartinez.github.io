@@ -244,6 +244,73 @@
                         </div>
 
                         <div x-show="tab === 'caracaddp'">
+                            <!--<div x-data="convocatoriasApp2()" class="panel-ejecutivo">
+
+                                <div class="card shadow-dashboard">
+                                    <div class="card-content">
+
+                                        <div class="nivel-superior">
+                                            <h2 class="titulo-dashboard">
+                                                <span class="icon mr-2">
+                                                    <i class="fa-regular fa-note-sticky"></i>
+                                                </span>
+                                                Convocatorias
+                                            </h2>
+                                        </div>
+
+                                        <div class="tabla-centrada">
+
+                                            <table class="table tabla-convocatorias">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Actividad</th>
+                                                        <th>Fecha</th>
+                                                        <th>Estatus</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <template x-for="item in datos" :key="item.titulo">
+                                                        <tr>
+                                                            
+                                                            <td class="actividad">
+                                                                <span x-text="item.titulo"></span>
+                                                            </td>
+
+                                                            <td class="fecha">
+                                                                <span x-text="item.fechaTexto"></span>
+                                                            </td>
+
+                                                            <td class="estatus">
+
+                                                                <span 
+                                                                    class="tag"
+                                                                    :class="{
+                                                                        'tag-vencido': esVencida(item.fecha),
+                                                                        'tag-hoy': esHoy(item.fecha),
+                                                                        'tag-activo': !esVencida(item.fecha) && !esHoy(item.fecha)
+                                                                    }"
+                                                                    x-text="
+                                                                        esVencida(item.fecha) ? 'Vencida' :
+                                                                        esHoy(item.fecha) ? 'Hoy' :
+                                                                        'Vigente'
+                                                                    ">
+                                                                </span>
+
+                                                            </td>
+
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>-->
                             <div x-data="caracaddpApp()" class="cronograma-dashboard">
                                 <div class="card shadow-dashboard">
                                     <div class="card-content">

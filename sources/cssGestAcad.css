@@ -164,6 +164,10 @@
     background: #f9fafb;
 }
 
+.tabla-dashboard td{
+    vertical-align:middle;
+}
+
 /* COLUMNAS */
 .col-id {
     width: 5%;
@@ -224,4 +228,89 @@
         flex-direction: column;
         align-items: flex-start;
     }
+}
+
+/*------------------------*/
+/* CONTENEDOR CENTRADO */
+
+.tabla-centrada{
+    display:flex;
+    justify-content:center;
+}
+
+/* TABLA */
+
+.tabla-convocatorias{
+    width:65%;
+    min-width:420px;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+/* HEADER */
+
+.tabla-convocatorias thead th{
+    background:var(--azul);
+    color:white;
+    text-align:center;
+    font-weight:600;
+}
+
+/* CELDAS */
+
+.tabla-convocatorias td{
+    vertical-align:middle;
+}
+
+/* ACTIVIDAD */
+
+.tabla-convocatorias .actividad{
+    font-weight:600;
+}
+
+/* FECHA */
+
+.tabla-convocatorias .fecha{
+    text-align:center;
+    font-weight:500;
+}
+
+/* ESTATUS */
+
+.tabla-convocatorias .estatus{
+    text-align:center;
+}
+
+/* TAGS */
+
+.tag{
+    font-size:.75rem;
+    padding:0.35em 0.75em;
+}
+
+/* VIGENTE */
+
+.tag-activo{
+    background:#e6f4ea;
+    color:#1e7e34;
+}
+
+/* HOY */
+
+.tag-hoy{
+    background:#fff3cd;
+    color:#856404;
+}
+
+/* VENCIDO */
+
+.tag-vencido{
+    background:#fdecea;
+    color:#a94442;
+}
+
+/* HOVER SUAVE */
+
+.tabla-convocatorias tbody tr:hover{
+    background:#f8fafc;
 }
