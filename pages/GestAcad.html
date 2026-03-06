@@ -67,14 +67,6 @@
                                         <span class="tab-text">Cargas Académicas</span>
                                     </a>
                                 </li>
-                                <li :class="{ 'is-active': tab === 'caracaddp' }">
-                                    <a @click="tab = 'caracaddp'">
-                                        <span class="icon is-small">
-                                            <i class="fa-solid fa-table-list"></i>
-                                        </span>
-                                        <span class="tab-text">Cargas Académicas DP</span>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -243,8 +235,8 @@
                             </div>
                         </div>
 
-                        <div x-show="tab === 'caracaddp'">
-                            <!--<div x-data="convocatoriasApp2()" class="panel-ejecutivo">
+                        <!--<div x-show="tab === 'caracaddp'">
+                           <div x-data="convocatoriasApp2()" class="panel-ejecutivo">
 
                                 <div class="card shadow-dashboard">
                                     <div class="card-content">
@@ -310,7 +302,7 @@
                                     </div>
                                 </div>
 
-                            </div>-->
+                            </div>
                             <div x-data="caracaddpApp()" class="cronograma-dashboard">
                                 <div class="card shadow-dashboard">
                                     <div class="card-content">
@@ -339,7 +331,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>		
                 </section>

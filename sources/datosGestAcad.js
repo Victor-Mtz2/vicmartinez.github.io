@@ -182,16 +182,3 @@ const CARACAD = [
   { titulo: "Región Coatzacoalcos-Minatitlán", fechaTexto: "22 de mayo", fecha: "2026-05-22" },
   { titulo: "Región Xalapa", fechaTexto: "25 al 27 de mayo", fecha: "2026-05-27" }
 ];
-
-const CARACADDP = [
-  { titulo: "Proceso de revisión de cargas académicas", fechaTexto: "18 de mayo al 5 de junio", fecha: "2026-06-05" },
-  { titulo: "Solicitud de apoyo a Vicerrectorías para revisión de cargas académicas", fechaTexto: "18 de mayo", fecha: "2026-05-18" },
-  { titulo: "Envío de reporte de cargas académicas y horarios de la revisión de cargas académicas al Sindicato Estatal de Personal Académico de la Universidad Veracruzana (FESAPAUV)", 
-    fechaTexto: "18 al 22 de mayo", fecha: "2026-05-22" },
-  { titulo: "Revisión de cargas académicas en las regiones", fechaTexto: "26 de mayo al 3 de junio", fecha: "2026-06-03" },
-  { titulo: "Región Poza Rica-Tuxpan", fechaTexto: "29 de mayo", fecha: "2026-05-29" },
-  { titulo: "Región Veracruz", fechaTexto: "28 de mayo", fecha: "2026-05-28" },
-  { titulo: "Región Orizaba-Córdoba", fechaTexto: "27 de mayo", fecha: "2026-05-27" },
-  { titulo: "Región Coatzacoalcos-Minatitlán", fechaTexto: "26 de mayo", fecha: "2026-05-26" },
-  { titulo: "Región Xalapa", fechaTexto: "1 al 3 de junio", fecha: "2026-06-03" }
-];
