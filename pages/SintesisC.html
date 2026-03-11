@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Síntesis Curricular | Portal de Trámites</title>
+    <link rel="stylesheet" type="text/css" href="../sources/bulma/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="../sources/cssTramites.css">
+    <style>
+        .bg-azul { background-color: #003366 !important; }
+        .card-profile { border-top: 5px solid #003366; }
+        .tag-area { margin-right: 5px; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <section class="hero bg-azul is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title has-text-white">Síntesis Curricular</h1>
+                <h2 class="subtitle has-text-white" id="header_nombre">Recursos Humanos</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-9">
+                    
+                    <div id="error_message" class="notification is-danger is-light is-hidden">
+                        <button class="delete" onclick="this.parentElement.classList.add('is-hidden')"></button>
+                        No se encontró el número de personal solicitado o el ID no es válido.
+                    </div>
+
+                    <div id="main_card" class="card card-profile">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-left">
+                                    <figure class="image is-96x96">
+                                        <img src="https://ui-avatars.com/api/?name=User&background=random&size=128" id="avatar" alt="Avatar" class="is-rounded">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p class="title is-3" id="nombre">Cargando...</p>
+                                    <p class="subtitle is-5 has-text-grey" id="no_personal"></p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="columns is-multiline">
+                                <div class="column is-6">
+                                    <h4 class="title is-5"><i class="fas fa-graduation-cap has-text-link"></i> Formación</h4>
+                                    <p><strong>Título:</strong> <span id="titulo"></span></p>
+                                    <p><strong>Posgrados:</strong> <span id="posgrados"></span></p>
+                                </div>
+                                <div class="column is-6">
+                                    <h4 class="title is-5"><i class="fas fa-briefcase has-text-success"></i> Experiencia</h4>
+                                    <p id="cargos"></p>
+                                </div>
+                                <div class="column is-12">
+                                    <h4 class="title is-5"><i class="fas fa-tags has-text-warning"></i> Áreas de Especialidad</h4>
+                                    <div id="tags_container" class="tags"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 has-text-centered">
+                        <a href="javascript:history.back()" class="button is-link is-outlined">
+                            <span class="icon"><i class="fas fa-chevron-left"></i></span>
+                            <span>Volver al listado</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p><strong>Dirección General de Recursos Humanos</strong><br>
+            Departamento de Asuntos Técnicos &copy; 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Arreglo JSON de datos
+        const SINTESIS = [
+            {nopersonal: "30974", nombre: "Victor Alfonso Martínez Martínez", titulo: "Licenciatura en Sistemas Computacionales Administrativos", 
+             posgrados: "Maestría en Sistemas Computacionales Administrativos", cargos: "2006-2024 Desarrollador de Sistemas en la DGTI",
+             otras: "Sistemas, Administrativas"},
+            {nopersonal: "34148", nombre: "Liliana Ruiz Mendoza", titulo: "Licenciatura en Estadística", 
+             posgrados: "Maestría en Educación", cargos: "2022-2025 Secretaria Particular SAF",
+             otras: "Funcionarias, Administrativas"},
+        ];
+
+        function renderPersona() {
+            // 1. Obtener los parámetros de la URL
+            const params = new URLSearchParams(window.location.search);
+            const idBuscado = params.get('id');
+
+            // 2. Buscar la persona en el arreglo
+            const persona = SINTESIS.find(p => p.nopersonal === idBuscado);
+
+            if (persona) {
+                // Llenar datos
+                document.getElementById('nombre').innerText = persona.nombre;
+                document.getElementById('header_nombre').innerText = persona.nombre;
+                document.getElementById('no_personal').innerText = "Personal No. " + persona.nopersonal;
+                document.getElementById('titulo').innerText = persona.titulo;
+                document.getElementById('posgrados').innerText = persona.posgrados;
+                document.getElementById('cargos').innerText = persona.cargos;
+                
+                // Generar Avatar dinámico por nombre
+                document.getElementById('avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(persona.nombre)}&background=random&size=128`;
+
+                // Procesar Tags
+                const tagsContainer = document.getElementById('tags_container');
+                persona.otras.split(',').forEach(tagText => {
+                    const span = document.createElement('span');
+                    span.className = 'tag is-info is-light is-medium';
+                    span.innerText = tagText.trim();
+                    tagsContainer.appendChild(span);
+                });
+            } else {
+                // Mostrar error si no existe
+                document.getElementById('main_card').classList.add('is-hidden');
+                document.getElementById('error_message').classList.remove('is-hidden');
+            }
+        }
+
+        // Ejecutar al cargar
+        window.onload = renderPersona;
+    </script>
+
+</body>
+</html>
