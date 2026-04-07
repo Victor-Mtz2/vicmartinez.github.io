@@ -75,7 +75,7 @@
 							</div>
 							
 							<div class="is-hidden-mobile">
-								<table class="table is-bordered" id="tablaFechas">
+								<table class="table is-bordered is-fullwidth tabla-simetrica" id="tablaFechas">
 									<thead>
 										<tr>
 											<th>Quincena</th>
@@ -85,7 +85,7 @@
 									</thead>
 									<tbody>
 										<template x-for="item in datos" :key="item.titulo">
-											<tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha) }">
+											<tr :class="{ 'has-background-grey-light has-text-grey-lighter': esVencida(item.fecha), 'has-background-warning': esHoy(item.fecha) }">
 												<td x-text="item.titulo"></td>
 												<td x-text="item.fechaNomina"></td>
 												<td x-text="item.fechaTexto"></td>
@@ -99,7 +99,7 @@
 							<div id="cardsFechas" class="is-hidden-tablet">
 								<template x-for="item in datos" :key="item.titulo">
 									<div class="card mb-2"
-										:class="{ 'has-background-grey-lighter has-text-grey': esVencida(item.fecha) }">
+										:class="{ 'has-background-grey-lighter has-text-grey': esVencida(item.fecha), 'has-background-warning': esHoy(item.fecha) }">
 										<div class="card-content py-2">
 											<span class="is-size-6">Quincena: </span><p class="has-text-weight-semibold" x-text="item.titulo"></p>
 											<span class="is-size-6">Fechas de pago de la nómina: </span><p class="has-text-weight-semibold" x-text="item.fechaNomina"></p>

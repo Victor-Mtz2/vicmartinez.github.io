@@ -32,8 +32,14 @@ function fechasApp() {
   return {
       datos,
       hoy,
-      esVencida(fecha) {
-      return new Date(fecha) < this.hoy;
+      esVencida(fecha){
+        const f = new Date(fecha + "T00:00:00");
+        return f < this.hoy;
+      },
+
+      esHoy(fecha){
+        const f = new Date(fecha + "T00:00:00");
+        return f.getTime() === this.hoy.getTime();
       }
   }
 }
