@@ -1,24 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Calendarios</title>
-		<!-- estilos Bulma -->
-		<link rel="stylesheet" type="text/css" href="./sources/bulma/css/bulma.min.css">
-	</head>
-	
-	<body>
-		<section class="section">
-			<div class="container">
-				<h1 class="title">
-					Sitios DGRH
-				</h1>
-				<p class="subtitle">
-					Páginas en repositorio <strong>Github</strong>!
-				</p>
-			</div>
-		</section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asuntos Técnicos | UV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="Sources/cssIndex.css">
+</head>
+<body class="bg-white">
 
-    </body>
+    <header class="w-full bg-blue-950 border-b border-slate-200 py-6 px-8">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex-shrink-0 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center overflow-hidden p-1">
+                <img src="Public/Logosimbolo_FO_chico.png" alt="Logo UV">
+            </div>
+            <div class="flex-grow text-center pr-24 md:pr-28"> 
+                <h1 class="text-2xl md:text-3xl font-black text-[#28AD56] uppercase tracking-tight leading-none">
+                    Departamento de Asuntos Técnicos
+                </h1>
+                <p class="text-white font-bold tracking-widest uppercase text-[10px] mt-1">
+                    Secretaría de Administración y Finanzas | Dirección General de Recursos Humanos
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 py-20 px-2 min-h-[600px] flex items-center" x-data="menuTecnico">
+        <div class="container mx-auto max-w-5xl relative z-10">
+            
+            <div class="mb-10 h-16 flex items-center justify-center text-center">
+                <p class="text-[#18529D] font-medium text-lg max-w-2xl transition-all duration-300" x-text="info"></p>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-10 md:gap-16">
+                <template x-for="item in items" :key="item.id">
+                    <div 
+                        @mouseenter="info = item.descripcion" 
+                        @mouseleave="info = 'Selecciona un área para más información'"
+                        :class="item.clasePersonalizada || (item.color === 'azul' ? 'border-[#18529D]' : 'border-[#28AD56]')"
+                        class="circle-item border-4 transition-all duration-300">
+                        
+                        <span class="circle-text" x-html="item.nombre"></span>
+                    </div>
+                </template>
+            </div>
+
+            
+        </div>
+    </main>
+
+    <footer class="py-10 text-center border-t border-slate-100">
+        <p class="text-[10px] text-slate-400 uppercase tracking-[0.4em] font-semibold">Universidad Veracruzana</p>
+    </footer>
+
+    <script src="Sources/js/index.js"></script>
+</body>
 </html>
