@@ -10,7 +10,7 @@ const datos = [
   { titulo: "1a mayo", fechaTexto: "28 de abril", fechaNomina:"13", fecha: "2026-04-28" },
   { titulo: "2a mayo", fechaTexto: "14 de mayo", fechaNomina:"28", fecha: "2026-05-14" },
   { titulo: "1a junio", fechaTexto: "01 de junio", fechaNomina:"12", fecha: "2026-06-01" },
-  { titulo: "2a junio", fechaTexto: "16 de junio*", fechaNomina:"29*", fecha: "2026-06-16" },
+  { titulo: "2a junio", fechaTexto: "16 de junio", fechaNomina:"26", fecha: "2026-06-16" },
   { titulo: "1a julio", fechaTexto: "22 de junio*", fechaNomina:"8*", fecha: "2026-06-22" },
   { titulo: "2a julio", fechaTexto: "22 de junio*", fechaNomina:"9*", fecha: "2026-06-22" },
   { titulo: "1a agosto", fechaTexto: "10 de julio*", fechaNomina:"13", fecha: "2026-07-10" },
