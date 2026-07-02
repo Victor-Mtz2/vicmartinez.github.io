@@ -10,7 +10,7 @@ const datos = [
   { titulo: "1a mayo", fechaTexto: "19 de mayo", fechaNomina:"1a junio", fecha: "2026-05-19" },
   { titulo: "2a mayo", fechaTexto: "02 de junio", fechaNomina:"2a junio", fecha: "2026-06-02" },
   { titulo: "1a junio", fechaTexto: "17 de junio", fechaNomina:"1a julio", fecha: "2026-06-17" },
-  { titulo: "2a junio", fechaTexto: "02 de julio", fechaNomina:"2a julio", fecha: "2026-07-02" },
+  { titulo: "2a junio", fechaTexto: "02 de julio", fechaNomina:"2a julio**", fecha: "2026-07-02" },
   { titulo: "1a julio", fechaTexto: "04 de agosto", fechaNomina:"1a agosto", fecha: "2026-08-04" },
   { titulo: "2a julio", fechaTexto: "04 de agosto", fechaNomina:"2a agosto", fecha: "2026-08-04" },
   { titulo: "1a agosto", fechaTexto: "18 de agosto", fechaNomina:"1a septiembre", fecha: "2026-08-18" },
@@ -20,7 +20,7 @@ const datos = [
   { titulo: "1a octubre", fechaTexto: "19 de octubre", fechaNomina:"1a noviembre", fecha: "2026-10-19" },
   { titulo: "2a octubre", fechaTexto: "04 de noviembre", fechaNomina:"2a noviembre", fecha: "2026-11-04" },
   { titulo: "1a noviembre", fechaTexto: "18 de noviembre", fechaNomina:"1a diciembre", fecha: "2026-11-18" },
-  { titulo: "2a noviembre", fechaTexto: "02 de diciembre*", fechaNomina:"2a diciembre", fecha: "2026-12-02" },
+  { titulo: "2a noviembre", fechaTexto: "02 de diciembre*", fechaNomina:"2a diciembre**", fecha: "2026-12-02" },
   { titulo: "1a diciembre", fechaTexto: "04 de enero 2027*", fechaNomina:"1a enero/2027", fecha: "2027-01-04" },
   { titulo: "2a diciembre", fechaTexto: "05 de enero 2027*", fechaNomina:"2a enero/2027", fecha: "2027-01-05" } 
 ];
