@@ -33,7 +33,7 @@ h3{
 
 
 .fondo {
-    background-image: url('../public/ribbon2.svg');
+    background-image: url('../Public/ribbon2.svg');
     background-color:white;
     background-attachment: fixed;
     background-repeat: no-repeat;
