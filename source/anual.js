@@ -25,8 +25,8 @@ const fechasPorTipo = {
                  "20-12-2027","21-12-2027","22-12-2027","23-12-2027","24-12-2027",
                  "27-12-2027","28-12-2027","29-12-2027","30-12-2027","31-12-2027"],
     inhabiles: {
+      "08-02-2027": "Carnaval",
       "09-02-2027": "Carnaval",
-      "10-02-2027": "Carnaval",
       "10-05-2027": "Día de las Madres"
     }
   },
@@ -86,8 +86,8 @@ const fechasPorTipo = {
                  "21-12-2027","22-12-2027","23-12-2027","24-12-2027",
                  "28-12-2027","29-12-2027","30-12-2027","31-12-2027"],
     inhabiles: {
+      "08-02-2027": "Carnaval",
       "09-02-2027": "Carnaval",
-      "10-02-2027": "Carnaval",
       "10-05-2027": "Día de las Madres"
     }
   },
@@ -307,16 +307,16 @@ function Selinhabiles(){
 function abrirPdf(){
     switch(tipo_personal) {
         case 'atm':
-            window.open("pdfs/Calendario_atm.pdf")
+            window.open("../pdfs/PropuestaATM_2027.pdf")
         break;
         case 'conf':
-            window.open("pdfs/Calendario_conf.pdf")
+            window.open("../pdfs/PropuestaConfianza_2027.pdf")
         break;
         case 'acad':
-            window.open("pdfs/Calendario_acad.pdf")
+            window.open("../pdfs/PropuestaAcademico_2027.pdf")
         break;
         case 'sea':
-            window.open("pdfs/Calendario_sea.pdf")
+            window.open("../pdfs/PropuestaSEA_2027.pdf")
         break;
     }
 }
