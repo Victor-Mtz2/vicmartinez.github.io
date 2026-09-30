@@ -6,43 +6,38 @@ const gruposAcceso = {
         { grupo: "Contraloría General", dependencia: "Contraloría General" },
         { grupo: "Editorial", dependencia: "Dirección de Editorial" },
         { grupo: "Editorial", dependencia: "Departamento de Archivo" },
-        { grupo: "Rectoria", dependencia: "Secretaría Académica" },
-        { grupo: "Rectoria", dependencia: "Secretaría de Administración y Finanzas" },
-        { grupo: "Facultades Xalapa", dependencia: "Facultad de Estadística e Informática" },
-        { grupo: "Facultades Xalapa", dependencia: "Facultad de Contaduría y Administración" },
-        { grupo: "Facultades Xalapa", dependencia: "Facultad de Derecho" }
+        { grupo: "Secretaría Académica", dependencia: "Dirección General de Desarrollo Académico e Innovación Educativa" },
+        { grupo: "Secretaría de Administración y Finanzas", dependencia: "Dirección de Recursos Financieros" }
     ],
     veracruz: [
         { grupo: "Vicerrectoría Veracruz", dependencia: "Vicerrectoría Región Veracruz" },
-        { grupo: "Vicerrectoría Veracruz", dependencia: "Secretaría Académica Regional" },
         { grupo: "Facultades Ingeniería", dependencia: "Facultad de Ingeniería Civil" },
         { grupo: "Facultades Ingeniería", dependencia: "Facultad de Ingeniería Mecánica y Eléctrica" },
-        { grupo: "Ciencias de la Salud", dependencia: "Facultad de Medicina" },
-        { grupo: "Ciencias de la Salud", dependencia: "Facultad de Odontología" },
-        { grupo: "Área Económico-Administrativa", dependencia: "Facultad de Contaduría Veracruz" }
+        { grupo: "Ciencias de la Salud", dependencia: "Facultad de Medicina Región Veracruz" },
+        { grupo: "Área Económico-Administrativa", dependencia: "Facultad de Contaduría y Administración" }
     ],
     orizaba_cordoba: [
         { grupo: "Vicerrectoría Orizaba", dependencia: "Vicerrectoría Región Orizaba-Córdoba" },
         { grupo: "Facultades Orizaba", dependencia: "Facultad de Ciencias Químicas" },
-        { grupo: "Facultades Orizaba", dependencia: "Facultad de Medicina Ixtaczoquitlán" },
-        { grupo: "Facultades Córdoba", dependencia: "Facultad de Arquitectura Córdoba" },
-        { grupo: "Facultades Córdoba", dependencia: "Facultad de Negocios y Tecnologías" }
+        { grupo: "Facultades Orizaba", dependencia: "Facultad de Odontología" },
+        { grupo: "Facultades Córdoba", dependencia: "Facultad de Arquitectura" },
+        { grupo: "Facultades Ixtaczoquitlán", dependencia: "Facultad de Ingeniería en Sistemas de Producción Agropecuaria" }
     ],
     poza_rica_tuxpan: [
         { grupo: "Vicerrectoría Poza Rica", dependencia: "Vicerrectoría Región Poza Rica-Tuxpan" },
         { grupo: "Facultades Poza Rica", dependencia: "Facultad de Ingeniería Poza Rica" },
-        { grupo: "Facultades Poza Rica", dependencia: "Facultad de Enfermería Poza Rica" },
-        { grupo: "Facultades Tuxpan", dependencia: "Facultad de Ciencias Biológicas y Agropecuarias Tuxpan" }
+        { grupo: "Facultades Poza Rica", dependencia: "Facultad de Enfermería" },
+        { grupo: "Facultades Tuxpan", dependencia: "Facultad de Ciencias Biológicas y Agropecuarias" }
     ],
     coatzacoalcos_minatitlan: [
         { grupo: "Vicerrectoría Coatzacoalcos", dependencia: "Vicerrectoría Región Coatzacoalcos-Minatitlán" },
+        { grupo: "Facultades Coatzacoalcos", dependencia: "Facultad de Contaduría y Administración" },
         { grupo: "Facultades Coatzacoalcos", dependencia: "Facultad de Ingeniería Coatzacoalcos" },
-        { grupo: "Facultades Coatzacoalcos", dependencia: "Facultad de Contaduría y Administración Coatzacoalcos" },
-        { grupo: "Facultades Minatitlán", dependencia: "Facultad de Enfermería Minatitlán" }
+        { grupo: "Facultades Minatitlán", dependencia: "Facultad de Enfermería Región Minatitlán" }
     ]
 };
 
-const regionNames = {
+const regionLabels = {
     xalapa: "Xalapa",
     veracruz: "Veracruz",
     orizaba_cordoba: "Orizaba - Córdoba",
@@ -50,7 +45,9 @@ const regionNames = {
     coatzacoalcos_minatitlan: "Coatzacoalcos - Minatitlán"
 };
 
-function initApp() {
+let activeRegion = 'xalapa';
+
+function renderApp() {
     const tabsContainer = document.getElementById('regionTabs');
     const contentContainer = document.getElementById('regionTabContent');
     
@@ -58,55 +55,62 @@ function initApp() {
     let contentHTML = '';
     let totalCount = 0;
 
-    const regionKeys = Object.keys(gruposAcceso);
+    const keys = Object.keys(gruposAcceso);
 
-    regionKeys.forEach((key, index) => {
-        const items = gruposAcceso[key];
-        totalCount += items.length;
-        const isActive = index === 0 ? 'active fw-bold text-success' : 'text-dark';
-        const isShow = index === 0 ? 'show active' : '';
-
-        // Construir pestaña usando Bootstrap nativo
+    keys.forEach(key => {
+        const count = gruposAcceso[key].length;
+        totalCount += count;
+        const isActive = key === activeRegion;
+        
+        // Build Tab Button
         tabsHTML += `
-            <li class="nav-item" role="presentation">
-                <button class="nav-link ${isActive} px-3 py-2 border-0 rounded-top" id="${key}-tab" data-bs-toggle="tab" data-bs-target="#${key}-pane" type="button" role="tab" aria-controls="${key}-pane" aria-selected="${index === 0}">
-                    <i class="bi bi-geo-alt-fill text-warning me-1"></i> ${regionNames[key]}
-                    <span class="badge bg-secondary rounded-pill ms-1">${items.length}</span>
-                </button>
-            </li>
+            <button onclick="switchRegion('${key}')" class="px-5 py-3 rounded-xl font-semibold text-sm transition-all flex items-center space-x-2 whitespace-nowrap ${
+                isActive 
+                ? 'bg-[rgb(24,82,157)] text-white shadow-md' 
+                : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+            }">
+                <i class="fa-solid fa-location-dot ${isActive ? 'text-[rgb(40,173,86)]' : 'text-gray-400'}"></i>
+                <span>${regionLabels[key]}</span>
+                <span class="ml-2 px-2 py-0.5 text-xs rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-600'}">${count}</span>
+            </button>
         `;
 
-        // Construir contenido de la pestaña usando Bootstrap nativo grid y cards
-        let itemsCardsHTML = '';
-        items.forEach(item => {
-            itemsCardsHTML += `
-                <div class="col-md-6 mb-3 item-card" data-grupo="${item.grupo.toLowerCase()}" data-dependencia="${item.dependencia.toLowerCase()}">
-                    <div class="card h-100 shadow-sm border-0 border-start border-success border-4 rounded-3 bg-light bg-opacity-50">
-                        <div class="card-body p-3">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <span class="badge bg-success text-white px-2 py-1">${item.grupo}</span>
-                                <small class="text-muted"><i class="bi bi-shield-check text-success"></i> Autorizado</small>
-                            </div>
-                            <h6 class="card-title fw-bold text-dark mb-1">${item.dependencia}</h6>
-                            <p class="card-text small text-muted mb-0"><i class="bi bi-pin-map text-danger me-1"></i> Región: ${regionNames[key]}</p>
+        // Build Tab Content Pane
+        let itemsCards = '';
+        gruposAcceso[key].forEach(item => {
+            itemsCards += `
+                <div class="dependencia-card bg-white rounded-2xl p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative overflow-hidden group"
+                        data-grupo="${item.grupo.toLowerCase()}" 
+                        data-dependencia="${item.dependencia.toLowerCase()}">
+                    <div class="absolute top-0 left-0 h-full w-1.5 bg-[rgb(40,173,86)]"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-50 text-[rgb(33,145,71)] border border-emerald-100">
+                                <i class="fa-solid fa-users-rectangle mr-1.5"></i> ${item.grupo}
+                            </span>
+                            <span class="text-xs text-gray-400 font-mono">UV-${regionLabels[key].substring(0,3).toUpperCase()}</span>
                         </div>
+                        <h3 class="font-bold text-gray-900 text-base mb-1 group-hover:text-[rgb(24,82,157)] transition-colors">${item.dependencia}</h3>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+                        <span><i class="fa-solid fa-shield-check text-[rgb(40,173,86)] mr-1"></i> Acceso Autorizado</span>
+                        <span class="text-[rgb(24,82,157)] font-medium">Región ${regionLabels[key]}</span>
                     </div>
                 </div>
             `;
         });
 
         contentHTML += `
-            <div class="tab-pane fade ${isShow}" id="${key}-pane" role="tabpanel" aria-labelledby="${key}-tab" tabindex="0">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="fw-bold text-secondary mb-0">Dependencias en la región ${regionNames[key]}</h5>
-                    <span class="badge bg-light text-dark border">${items.length} registros</span>
+            <div id="pane-${key}" class="region-pane ${isActive ? 'block' : 'hidden'} space-y-6">
+                <div class="flex items-center justify-between bg-white px-6 py-4 rounded-xl border border-gray-200 shadow-sm">
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-900">Región ${regionLabels[key]}</h2>
+                        <p class="text-xs text-gray-500">Listado institucional de dependencias y áreas con grupos de acceso asignados</p>
+                    </div>
+                    <span class="px-3 py-1 bg-blue-50 text-[rgb(24,82,157)] text-xs font-bold rounded-lg border border-blue-100">${count} dependencias</span>
                 </div>
-                <div class="row">
-                    ${itemsCardsHTML}
-                </div>
-                <div class="no-results-region text-center py-5 d-none">
-                    <i class="bi bi-search display-6 text-muted"></i>
-                    <p class="text-muted mt-2">No se encontraron dependencias en esta región con el término buscado.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    ${itemsCards}
                 </div>
             </div>
         `;
@@ -114,44 +118,48 @@ function initApp() {
 
     tabsContainer.innerHTML = tabsHTML;
     contentContainer.innerHTML = contentHTML;
-    document.getElementById('total-dependencias-badge').innerText = `${totalCount} dependencias`;
-
-    setupSearch();
-}
-
-function setupSearch() {
-    const searchInput = document.getElementById('searchInput');
+    document.getElementById('total-badge').innerText = totalCount;
     
-    searchInput.addEventListener('input', function(e) {
-        const searchTerm = e.target.value.toLowerCase().trim();
-        const allPanes = document.querySelectorAll('.tab-pane');
-
-        allPanes.forEach(pane => {
-            const cards = pane.querySelectorAll('.item-card');
-            const noResultsMsg = pane.querySelector('.no-results-region');
-            let visibleCount = 0;
-
-            cards.forEach(card => {
-                const grupo = card.getAttribute('data-grupo');
-                const dependencia = card.getAttribute('data-dependencia');
-
-                if (grupo.includes(searchTerm) || dependencia.includes(searchTerm)) {
-                    card.style.display = '';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            if (visibleCount === 0) {
-                noResultsMsg.classList.remove('d-none');
-            } else {
-                noResultsMsg.classList.add('d-none');
-            }
-        });
-    });
+    // Reapply current search filter if any
+    filterItems();
 }
 
+function switchRegion(regionKey) {
+    activeRegion = regionKey;
+    renderApp();
+}
+
+function filterItems() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const activePane = document.getElementById(`pane-${activeRegion}`);
+    if (!activePane) return;
+
+    const cards = activePane.querySelectorAll('.dependencia-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        const grupo = card.getAttribute('data-grupo');
+        const dependencia = card.getAttribute('data-dependencia');
+        
+        if (grupo.includes(query) || dependencia.includes(query)) {
+            card.style.display = 'flex';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    const emptyState = document.getElementById('globalEmptyState');
+    if (visibleCount === 0 && query !== '') {
+        emptyState.classList.remove('hidden');
+    } else {
+        emptyState.classList.add('hidden');
+    }
+}
+
+document.getElementById('searchInput').addEventListener('input', filterItems);
+
+// Initialize on window load
 window.onload = function() {
-    initApp();
+    renderApp();
 };
