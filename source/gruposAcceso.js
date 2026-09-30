@@ -93,7 +93,6 @@ function renderApp() {
                         <h3 class="font-bold text-gray-900 text-base mb-1 group-hover:text-[rgb(24,82,157)] transition-colors">${item.dependencia}</h3>
                     </div>
                     <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                        <span><i class="fa-solid fa-shield-check text-[rgb(40,173,86)] mr-1"></i> Acceso Autorizado</span>
                         <span class="text-[rgb(24,82,157)] font-medium">Región ${regionLabels[key]}</span>
                     </div>
                 </div>
